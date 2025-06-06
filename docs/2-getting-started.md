@@ -62,7 +62,7 @@ You will need a public-facing business website for this lab.
 
 ## Continue
 
-In the next section, we'll launch our Codespaces instance.
+In the next section, we'll explore the differences between a Customer Journey and a Business Journey.
 
 <div class="grid cards" markdown>
 - [Continue to Customer Journeys vs Business Journeys:octicons-arrow-right-24:](3-customer-business-journeys.md)

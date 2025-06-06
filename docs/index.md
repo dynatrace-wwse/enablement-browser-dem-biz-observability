@@ -7,6 +7,7 @@
 
 ## Lab Overview
 
+<!--TODO: Update lab overview -->
 During this hands-on training lab, we’ll explore the Digital Experience Management (DEM) and Business Observability capabilities of the Dynatrace platform, by instrumenting Real User Monitoring (RUM) and Business Analytics from our local browser using the Tampermonkey Chrome Extension.
 
 <!--TODO: Before going live, finalize lab tasks-->
@@ -19,6 +20,7 @@ During this hands-on training lab, we’ll explore the Digital Experience Manage
     - Browse the website to begin data tracking
     - Analyze Customer Journey
 3. Business Observability with RUM
+    - Capture BizEvent from Browser
     - Analyze BizEvents
 4. Business Journey Automation
     - Generate Business Flow using CoPilot
@@ -31,14 +33,8 @@ During this hands-on training lab, we’ll explore the Digital Experience Manage
 <!--TODO: Before going live, update technologies used in the lab-->
 ### Technologies Used
 - [Dynatrace](https://www.dynatrace.com/trial)
-- [Kubernetes Kind](https://kind.sigs.k8s.io/)
-    - tested on Kind tag 0.27.0
-- [Cert Manager](https://cert-manager.io/) - *prerequisite for OpenTelemetry Operator
-    - tested on cert-manager v1.15.3
-- [Dynatrace Operator](https://github.com/Dynatrace/dynatrace-operator)
-    - tested on v1.4.2 (April 2025)
-- Dynatrace OneAgent
-    - tested on v1.309 (April 2025)
+- Technology with Link
+    - Version Tested
 
 <!--TODO: Before going live, update reference architecture in the lab-->
 ### Reference Architecture

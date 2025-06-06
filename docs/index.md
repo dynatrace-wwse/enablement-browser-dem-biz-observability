@@ -1,28 +1,48 @@
---8<-- "snippets/index.js"
+--8<-- "snippets/send-bizevent/index.js"
 
 --8<-- "snippets/disclaimer.md"
 
-## What's this tutorial all about
-In this tutorial we'll learn:
+<!--TODO: Before going live, remove the under-construction snippet-->
+--8<-- "snippets/under-construction.md"
 
-- how this codespace is being built
-- how is the separation of concerns of the architecture in this devcontainer
-- the functions.sh file
-- create Github documentation and publish it
-- How MKDocs work
-- monitor the Github documentation
-- monitor the instatiation of codespaces (learn about the usage of a specific enablement)
-- exposing ports
-- tipp & tricks
-- troubleshooting
+## Lab Overview
 
-<p align="center">
-  <img src="img/dt_professors.png" alt="Professors" width="200">
-</p>
+<!--TODO: Update lab overview -->
+During this hands-on training lab, we’ll explore the Digital Experience Management (DEM) and Business Observability capabilities of the Dynatrace platform, by instrumenting Real User Monitoring (RUM) and Business Analytics from our local browser using the Tampermonkey Chrome Extension.
 
+<!--TODO: Before going live, finalize lab tasks-->
+**Lab tasks:**
 
-!!! tip "What will we do"
-    In this tutorial we will learn how easy it is to create an enablement using codespaces and a Kubernetes cluster!
+1. Customer Journey vs Business Journey
+2. Real User Monitoring
+    - Configure Agentless RUM
+    - Configure Browser Extension
+    - Browse the website to begin data tracking
+    - Analyze Customer Journey
+3. Business Observability with RUM
+    - Capture BizEvent from Browser
+    - Analyze BizEvents
+4. Business Journey Automation
+    - Generate Business Flow using CoPilot
+    - Configure Dynatrace Workflow Automation
+    - Analyze Business Journey BizEvents
+    - Analyze Business Flow
+
+## Technical Specification
+
+<!--TODO: Before going live, update technologies used in the lab-->
+### Technologies Used
+- [Dynatrace](https://www.dynatrace.com/trial)
+- Technology with Link
+    - Version Tested
+
+<!--TODO: Before going live, update reference architecture in the lab-->
+### Reference Architecture
+
+## Continue
+
+In the next section, we'll review the prerequisites for this lab.
 
 <div class="grid cards" markdown>
-- [Yes! let's begin :octicons-arrow-right-24:](2-getting-started.md)
+- [Continue to getting started:octicons-arrow-right-24:](2-getting-started.md)
+</div>

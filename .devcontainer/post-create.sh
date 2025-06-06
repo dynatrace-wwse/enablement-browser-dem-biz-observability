@@ -7,9 +7,11 @@ bindFunctionsInShell
 
 setupAliases
 
-createKindCluster
+# Kind cluster not needed
+#createKindCluster
 
-installK9s
+# k9s not needed
+#installK9s
 
 #TODO: BeforeGoLive: uncomment this. This is only needed for professors to have the Mkdocs live in the container
 installMkdocs
@@ -26,7 +28,7 @@ installMkdocs
 
 # In here you deploy the Application you want
 # The TODO App will be deployed as a sample
-deployTodoApp
+#deployTodoApp
 
 # The Astroshop keeping changes of demo.live needs certmanager
 #certmanagerInstall

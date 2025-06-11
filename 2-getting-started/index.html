@@ -344,18 +344,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-or-validate-dem-apps" class="md-nav__link">
+  <a href="#install-rum-injection-extension-for-chrome" class="md-nav__link">
     <span class="md-ellipsis">
-      Install or validate DEM Apps
+      Install RUM Injection Extension for Chrome
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-tampermonkey-chrome-extension" class="md-nav__link">
+  <a href="#install-dynatrace-session-replay-extension-for-chrome" class="md-nav__link">
     <span class="md-ellipsis">
-      Install Tampermonkey Chrome Extension
+      Install Dynatrace Session Replay Extension for Chrome
     </span>
   </a>
   
@@ -507,18 +507,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-or-validate-dem-apps" class="md-nav__link">
+  <a href="#install-rum-injection-extension-for-chrome" class="md-nav__link">
     <span class="md-ellipsis">
-      Install or validate DEM Apps
+      Install RUM Injection Extension for Chrome
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-tampermonkey-chrome-extension" class="md-nav__link">
+  <a href="#install-dynatrace-session-replay-extension-for-chrome" class="md-nav__link">
     <span class="md-ellipsis">
-      Install Tampermonkey Chrome Extension
+      Install Dynatrace Session Replay Extension for Chrome
     </span>
   </a>
   
@@ -585,39 +585,28 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">#</a></h2>
 <p>You will need full administrator access to a Dynatrace SaaS tenant with a DPS license.</p>
 <ul>
-<li>Install or validate DEM Apps</li>
-<li>Install Tampermonkey Chrome Extension</li>
+<li>Install RUM Injection Extension for Chrome</li>
+<li>Install Dynatrace Session Replay Extension for Chrome</li>
 <li>Identify public-facing business website<ul>
 <li>Identify multi-page business flow sequence</li>
 </ul>
 </li>
-<li>Create a Synthetic Browser Monitor</li>
 </ul>
-<h3 id="install-or-validate-dem-apps">Install or validate DEM Apps<a class="headerlink" href="#install-or-validate-dem-apps" title="Permanent link">#</a></h3>
-<p>In your Dynatrace SaaS tenant, launch the <strong>Hub</strong> App.</p>
-<p><img alt="Hub App" src="../img/prereq-launch-hub-app.png" /></p>
-<p>Validate that the <strong>Error Inspector</strong> App is installed.</p>
-<p><img alt="Error Inspector" src="../img/prereq-install_validate_error_inspector.png" /></p>
-<p>Search for, locate, and install the <strong>Experience Vitals</strong> App.</p>
-<p><img alt="Experience Vitals" src="../img/prereq-install_validate_experience_vitals.png" /></p>
-<p>Search for, locate, and install the <strong>Session Replay</strong> App.</p>
-<p><img alt="Session Replay" src="../img/prereq-install_validate_session_replay.png" /></p>
-<p>Search for, locate, and install the <strong>Users &amp; Sessions</strong> App.</p>
-<p><img alt="Users and Sessions" src="../img/prereq-install_validate_users_sessions.png" /></p>
-<h3 id="install-tampermonkey-chrome-extension">Install Tampermonkey Chrome Extension<a class="headerlink" href="#install-tampermonkey-chrome-extension" title="Permanent link">#</a></h3>
-<p>Open your <strong>Chrome</strong> browser.  Navigate to the <code>Chrome Web Store</code>.</p>
-<p><a href="https://chromewebstore.google.com/category/extensions?utm_source=ext_sidebar&amp;hl=en-US" target="_blank">Chrome Web Store</a></p>
-<p>Search for the <strong>Tampermonkey</strong> extension.</p>
-<p><img alt="Search Tampermonkey" src="../img/prereq-chrome_web_store.png" /></p>
-<p>Select the extension.  Click on <code>Add to Chrome</code> to install the extension.  When prompted, click <code>Add extension</code>.</p>
-<p><img alt="Install Tampermonkey" src="../img/prereq-tampermonkey_add_to_chrome.png" /></p>
-<p>Once the extension is installed, the Tampermonkey dashboard should appear to validate the installation.</p>
-<p><img alt="Validate Tampermonkey" src="../img/prereq-tampermonkey_installed.png" /></p>
-<div class="admonition warning">
-<p class="admonition-title">Powered by Ads</p>
-<p>The Tampermonkey extension is free and powered by advertisements.  Do not accidentally click on the advertisements.  Our team takes zero responsability for any affects of this extension and advertisements.
-<img alt="Tampermonkey Ads" src="../img/prereq-tampermonkey_advertisements.png" /></p>
-</div>
+<h3 id="install-rum-injection-extension-for-chrome">Install RUM Injection Extension for Chrome<a class="headerlink" href="#install-rum-injection-extension-for-chrome" title="Permanent link">#</a></h3>
+<p>Open Chrome and navigate to <strong><a href="https://github.com/dynatrace-wwse/rum-injection-demo" target="_blank">https://github.com/dynatrace-wwse/rum-injection-demo</a></strong>, click the <code>Code</code> button, then <code>Download ZIP</code></p>
+<p><img alt="download plugin" src="../img/prereq-download_repo_zip.png" /></p>
+<p>Open your download folder and unzip <code>rum-injection-demo-main.zip</code></p>
+<p><img alt="unzipped plugin" src="../img/prereq-unzipped_plugin.png" /></p>
+<p>In Chrome, select <code>menu "𐄛"  &gt; Extensions &gt; Manage Extensions</code></p>
+<p>Enable Developer Mode in the top right</p>
+<p>Click <code>Load Unpacked</code></p>
+<p>Nagivate to the unzipped directory from step #2 and click <code>Select</code></p>
+<p><img alt="install unpacked extension" src="../img/prereq-install_unpacked_extension.gif" /></p>
+<h3 id="install-dynatrace-session-replay-extension-for-chrome">Install Dynatrace Session Replay Extension for Chrome<a class="headerlink" href="#install-dynatrace-session-replay-extension-for-chrome" title="Permanent link">#</a></h3>
+<p>Navigate to the extension in the Chrome Web Store using Chrome.</p>
+<p><a href="https://chromewebstore.google.com/detail/session-replay-browser-ex/hjbdnbhpfiionafiooklnafmaojjfljh" target="_blank">Chrome Web Store</a></p>
+<p>Install the extension.</p>
+<p><img alt="Install Extension" src="../img/prereq_session_replay_chrome_extension.gif" /></p>
 <h3 id="identify-public-facing-business-website">Identify Public-facing Business Website<a class="headerlink" href="#identify-public-facing-business-website" title="Permanent link">#</a></h3>
 <p>You will need a public-facing business website for this lab.</p>
 <h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>

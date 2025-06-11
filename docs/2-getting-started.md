@@ -5,56 +5,40 @@
 
 You will need full administrator access to a Dynatrace SaaS tenant with a DPS license.
 
-* Install or validate DEM Apps
-* Install Tampermonkey Chrome Extension
+* Install RUM Injection Extension for Chrome
+* Install Dynatrace Session Replay Extension for Chrome
 * Identify public-facing business website
     - Identify multi-page business flow sequence
-* Create a Synthetic Browser Monitor
 
+### Install RUM Injection Extension for Chrome
 
-### Install or validate DEM Apps
+Open Chrome and navigate to **[https://github.com/dynatrace-wwse/rum-injection-demo](https://github.com/dynatrace-wwse/rum-injection-demo){target=_blank}**, click the `Code` button, then `Download ZIP`
 
-In your Dynatrace SaaS tenant, launch the **Hub** App.
+![download plugin](./img/prereq-download_repo_zip.png)
 
-![Hub App](./img/prereq-launch-hub-app.png)
+Open your download folder and unzip `rum-injection-demo-main.zip`
 
-Validate that the **Error Inspector** App is installed.
+![unzipped plugin](./img/prereq-unzipped_plugin.png)
 
-![Error Inspector](./img/prereq-install_validate_error_inspector.png)
+In Chrome, select `menu "𐄛"  > Extensions > Manage Extensions`
 
-Search for, locate, and install the **Experience Vitals** App.
+Enable Developer Mode in the top right
 
-![Experience Vitals](./img/prereq-install_validate_experience_vitals.png)
+Click `Load Unpacked`
 
-Search for, locate, and install the **Session Replay** App.
+Nagivate to the unzipped directory from step #2 and click `Select`
 
-![Session Replay](./img/prereq-install_validate_session_replay.png)
+![install unpacked extension](./img/prereq-install_unpacked_extension.gif)
 
-Search for, locate, and install the **Users & Sessions** App.
+### Install Dynatrace Session Replay Extension for Chrome
 
-![Users and Sessions](./img/prereq-install_validate_users_sessions.png)
+Navigate to the extension in the Chrome Web Store using Chrome.
 
-### Install Tampermonkey Chrome Extension
+[Chrome Web Store](https://chromewebstore.google.com/detail/session-replay-browser-ex/hjbdnbhpfiionafiooklnafmaojjfljh){target=_blank}
 
-Open your **Chrome** browser.  Navigate to the `Chrome Web Store`.
+Install the extension.
 
-[Chrome Web Store](https://chromewebstore.google.com/category/extensions?utm_source=ext_sidebar&hl=en-US){target=_blank}
-
-Search for the **Tampermonkey** extension.
-
-![Search Tampermonkey](./img/prereq-chrome_web_store.png)
-
-Select the extension.  Click on `Add to Chrome` to install the extension.  When prompted, click `Add extension`.
-
-![Install Tampermonkey](./img/prereq-tampermonkey_add_to_chrome.png)
-
-Once the extension is installed, the Tampermonkey dashboard should appear to validate the installation.
-
-![Validate Tampermonkey](./img/prereq-tampermonkey_installed.png)
-
-!!! warning "Powered by Ads"
-    The Tampermonkey extension is free and powered by advertisements.  Do not accidentally click on the advertisements.  Our team takes zero responsability for any affects of this extension and advertisements.
-    ![Tampermonkey Ads](./img/prereq-tampermonkey_advertisements.png)
+![Install Extension](./img/prereq_session_replay_chrome_extension.gif)
 
 ### Identify Public-facing Business Website
 

@@ -8,7 +8,8 @@ You will need full administrator access to a Dynatrace SaaS tenant with a DPS li
 * Install RUM Injection Extension for Chrome
 * Install Dynatrace Session Replay Extension for Chrome
 * Identify public-facing business website
-    - Identify multi-page business flow sequence
+    - Identify multi-page customer journey
+* Identify multi-step business process with Microsoft CoPilot
 
 ### Install RUM Injection Extension for Chrome
 
@@ -42,7 +43,43 @@ Install the extension.
 
 ### Identify Public-facing Business Website
 
-You will need a public-facing business website for this lab.
+!!! tip "Public Website"
+    For this lab guide, we will reference Walmart's website.  Walmart is chosen due to their brand recognition, ecommerce platform, typical end-to-end business processes for their industry, and general fit for this exercise.  This lab, and the authors of this lab, have no affiliation to Walmart, their business, their observability strategy, or anything of the like.  All references to Walmart in this lab are from public facing non-confidential sources gathered through Microsoft CoPilot. 
+
+You will need a public-facing business website for this lab.  Identify a multi-step customer journey on that business website.
+
+For example:
+
+1. Homepage
+2. Search Product
+3. View Product
+4. Add to Cart
+5. Checkout
+6. Place Order
+
+You can/should skip any steps that require actual payment or personal information, as this is a training workshop.
+
+### Identify Multi-step Business Process with Microsoft CoPilot
+
+Use Microsoft CoPilot to identify the details of a multi-step business process.
+
+In the text below, replace `COMPANY`, `COUNTRY`, `FIRST STEP`, and `LAST STEP` with the details for your company.
+
+```
+In the below prompt, replace:
+{Company Name} with COMPANY
+{Country} with COUNTRY
+{Business Process} with Business Process from FIRST STEP to LAST STEP
+
+I’m working with {Company Name} in {Country} to build a business analytics dashboard that maps out the end-to-end business process of {Business Process} and ties IT context to business KPIs. Provide 2 outputs and ensure to use {Company Name}’s terminology and language.
+
+Output 1: A simple numbered list of the logical steps in the process. 
+Output 2: A detailed explanation for all the logical steps, critical non-technical business KPIs for each step and for the entire process, and IT and technology tied to each of the steps. 
+
+If there are more than 5 steps, simplify to the 5 most business-critical steps.
+```
+
+Save the output of the prompt somewhere that you can access it later, such as in a Dynatrace Notebook.
 
 ## Continue
 

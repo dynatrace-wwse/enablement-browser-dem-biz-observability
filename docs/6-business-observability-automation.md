@@ -7,63 +7,139 @@ Synopsis
 - [Learn More:octicons-arrow-right-24:](https://docs.dynatrace.com/docs/ingest-from/setup-on-k8s/deployment/k8s-log-monitoring){target="_blank"}
 </div>
 
-## Step
+## Configure Workflow
 
 TODO
 
-### Sub-Step
+### Download Workflow Assets
 
-TODO
+Download the Workflow template and configuration code snippet.
 
-Latest Business Data Generator guide is here, the link to download the Workflow template is on slide 5. 
+[Workflow Template](./assets/dynatrace/workflow/wf_business_data_generator_3008.json)
 
-To import the generator, go to Workflows > Upload and choose the JSON file you have just downloaded. The generator will be imported but not active, so you have time to make changes before it starts. 
+[Configuration Code Snippet](./assets/dynatrace/workflow/config.js)
 
-*** Optional part, as it would be very cool if the prompt can take care of this – not described in too much detail as it’s inline in the code the specifics of the numbers *** 
+### Update Code Snippet
 
-It’s only the “config” part of the generator that needs any changes – this is where you’ll define what the business process looks like and make it customized to your prospect. 
+Use Microsoft CoPilot to update the configuration code snippet.
 
-At the top you can set high level variables like the name of the Flow (used in the BizFlow config), the event.provider attached to all events and the name of the correlation.id present on all steps. 
+<div class="grid cards" markdown>
+- [Open Microsoft CoPilot:octicons-arrow-right-24:](https://copilot.cloud.microsoft/){target="_blank"}
+</div>
 
-First part is the journey steps – each step has a “pretty name” (used in the BizFlow config) and the name that will be used for the event.type (for example “Online booking” vs  “online.booking”). The other sections (not applicable on the first step) are  the drop off percentage from the previous step, the minimum and maximum time in hours the step can take (for example 0.5 would be 30 minutes) and then a true/false on whether this step should loop and how many times (if it’s set to false the number is not read). 
+Start a new conversation with CoPilot.  Start by providing your business journey prompt that you used in the **Getting started** section of the lab.  Allow CoPilot to generate a response.
 
-Optional step is one that only some flows will go through which makes a nice “branch” in the BizFlow that gets created. 
+Walmart example:
+```text
+In the below prompt, replace:
+{Company Name} with Walmart
+{Country} with United States of America
+{Business Process} with online order fulfillment from order placement to order delivery
 
-Locations can be countries/cities, but could also, for example be office locations or warehouses – depending on the type of flow that you have defined. 
+I’m working with {Company Name} in {Country} to build a business analytics dashboard that maps out the end-to-end business process of {Business Process} and ties IT context to business KPIs. Provide 2 outputs and ensure to use {Company Name}’s terminology and language.
 
-A segment is the different “profile” of flows that get generated – for example in retail or travel we might have loyalty status, when applying for a mortgage there might be different types of mortgages. This is then often used when creating a dashboard to show some interesting visualisations. 
+Output 1: A simple numbered list of the logical steps in the process. 
+Output 2: A detailed explanation for all the logical steps, critical non-technical business KPIs for each step and for the entire process, and IT and technology tied to each of the steps. 
 
-Revenue could be used to actually show realized revenue from something like a retail transaction, but also could just represent the value of a transaction – for example when making a payment in the banking world. 
+If there are more than 5 steps, simplify to the 5 most business-critical steps.
+```
 
-Errors will be generated based on the step you define, and added automatically to the BizFlow. Try to pick something that’s less of a technical error and more of a “business” error – for example “insufficient funds” when making a payment. 
+![CoPilot Business Prompt](./img/biz-obs-auto_copilot_business_prompt.png)
 
-The “HOST_ENTITY” is useful when you want to show the topology linkage we have – this will add a drilldown from the BizEvents but obviously is just for show as these events are generated. 
+Next, upload the configuration code snippet that you downloaded (`config.js`) by clicking the `+` button and then `Upload from this device`.
 
-There isn’t often a need to change the “TIMES_OF_DAY” at the bottom, this just makes a nice “wave” pattern of the traffic that peaks during the day so it looks slightly natural. 
+![CoPilot Upload](./img/biz-obs-auto_copilot_upload_from_this_device.png)
 
-*** End of optional part *** 
+Before submitting the file, add the following to your message to give CoPilot instructions on what to do with the code snippet.
 
-Replace the config step with the generate code and run the workflow. If you want it to continue generating data, set the Workflow to active and hit Save, it will then generate new Biz Events every 5 minutes. 
+```text
+Using the information provided, modify the attached script by replacing the placeholder values with the company's business process details.  Output the value of the modified script here so that I may see it.
+```
 
-Gotchas: If the generator steps fail, look at the Workflow results and click on the individual step that has failed. The most common is permissions - if you are running it as yourself, you need to have storage:events:write.  
+Submit your prompt and allow CoPilot to generate a response.  Review the results provided and validate that it looks OK.
 
-Good to know: The generator will dump in 24 hours worth of historical data, it chooses to do that based on whether there is biz events that already exist with the “event.provider” that you have specified – otherwise it will start to generate new data. If you need fresh data, change the event.provider. You will also see events with the same “event.provider” but with “.temp” added – this is normal and is part of how the generator works. 
+![CoPilot Code Snippet Validation](./img/biz-obs-auto_copilot_code_snippet_output_validation.png)
 
-Once the generator has run, you can go into the execution results and check that the results of the “generate_historical_data” step, you should see messages similar to the below. 
+If the contents look OK, ask CoPilot to provide a downloadable link (it may be a suggested prompt).
 
-Picture 1, Picture 
+```text
+Yes, please provide a downloadable link.
+```
 
-Confirm bizevents and OOTB template dashboard is properly running and in their sprint tenant as well as the BizFlow that gets uploaded. You can check the Biz Events in a Notebook, simply do a “fetch bizevents” that filters on the event.provider that you have chosen: 
+![CoPilot Code Snippet Download](./img/biz-obs-auto_copilot_code_snippet_download.png)
 
-Picture 1, Picture 
+Download and save the modified code snippet.
 
-The BizFlow generated should accurately match what’s defined in your generator config, including looped steps, branches and errors. The KPIs along the top should also all be populated. 
+### Upload and Modify Workflow
 
-Picture 1, Picture 
+In your Dynatrace tenant, launch the **Workflows** app.  From the `All workflows` tab, click on `Upload` and provide the Workflow template file that you downloaded (`wf_business_data_generator_3008.json`).
 
-The dashboard will just be a template and should resemble the below, where 3 of the tiles are populated, but the rest is empty – this is what we will configure. To create a good demo “story” – you can change the content of the fixed tiles, for example to introduce an IT error at one step. 
+![Workflow Upload](./img/biz-obs-auto_workflows_upload_workflow.png)
 
-Picture 1, Picture 
+The Workflow will be created from the template and you'll be editing a draft.  Click on the **config** task and click on `Input` to see the source code of this task.  This is the code snippet that we need to replace with the modified code snippet that CoPilot gave us.
+
+![Workflow Config Start](./img/biz-obs-auto_workflows_config_input_start.png)
+
+Copy the modified code snippet to your clipboard.  Select the entire block of code in the `Input` field, delete it, and paste in the modified code snippet.
+
+![Workflow Config Replace](./img/biz-obs-auto_workflows_config_input_replace.gif)
+
+!!! tip "Business Process Version Control"
+    The results generated by the workflow are uniquely identified by the `event.provider` field.  Consider starting with a temporary value or using version control while you perfect the results.  For example, you can add `.v001` to the end of the `event.provider` field and increment the version as you make updates.
+    ![Version Control](./img/biz-obs-auto_workflows_config_input_version.png)
+
+Once you've finished updating the `Input` of the **config** task, click `Save draft` to save your changes to the Workflow.
+
+![Workflow Save Draft](./img/biz-obs-auto_workflows_save_draft_first_time.png)
+
+Run the Workflow manually by click on `Run`.
+
+![Run Workflow](./img/biz-obs-auto_workflows_run_workflow_manually_first_time.png)
+
+Validate that the Workflow runs successfully.  Once validated, edit the Workflow, toggle on the `Schedule` trigger so that it executes every 5 minutes.  Click on `Save` to save the changes.  Then click on `Deploy` to activate and deploy the Workflow automation.
+
+![Deploy Workflow](./img/biz-obs-auto_workflows_schedule_and_deploy.png)
+
+**Troubleshooting Tips**
+
+Gotchas: If the generator steps fail, look at the Workflow results and click on the individual step that has failed. The most common is permissions - if you are running it as yourself, you need to have `storage:events:write` permissions.  
+
+Good to know: The generator will dump in 24 hours worth of historical data, it chooses to do that based on whether there is biz events that already exist with the `event.provider` that you have specified – otherwise it will start to generate new data. If you need fresh data, change the event.provider. You will also see events with the same event.provider but with `.temp` added – this is normal and is part of how the generator works. 
+
+Once the generator has run, you can go into the execution results and check that the results of the “generate_historical_data” step, you should see messages similar to the below.
+
+### Validate Results
+
+When the Workflow runs successfully, you have (3) items to validate.
+
+1. BizEvents for your `event.provider` value
+2. Business Flow configured in the Business Flow app
+3. Business Flow dashboard in the Dashboards app
+
+**Validate BizEvents**
+
+Validate your BizEvents by running a DQL query.  The simplest way to do this is with a **Notebook**.  Query data for the last `24 hours`.
+
+DQL:
+```sql
+fetch bizevents
+| filter event.provider == "your.event.provider"
+| summarize count(), by: {event.provider, event.type}
+```
+
+![Validate BizEvents DQL](./img/biz-obs-auto_workflows_validate_bizevents_dql.png)
+
+**Validate Business Flow**
+
+Validate your Business Flow.  Open the **Business Flow** app.  Locate the Business Flow that matches the name of your business process.  We'll explore it in more detail in an upcoming section.  For now, just make sure it was created successfully.
+
+![Validate Business Flow](./img/biz-obs-auto_workflows_validate_business_flow.png)
+
+**Validate Dashboard**
+
+Validate your business flow dashboard.  Open the **Dashboards** app.  Locate the dashboard that matches the name of your business process.  We'll explore it in more detail, and complete it, in an upcoming section.  For now, just make sure it was created successfully.
+
+![Validate Dashboard](./img/biz-obs-auto_workflows_validate_dashboard.png)
 
 ## Conclusion
 

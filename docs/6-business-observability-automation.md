@@ -106,7 +106,7 @@ Gotchas: If the generator steps fail, look at the Workflow results and click on 
 
 Good to know: The generator will dump in 24 hours worth of historical data, it chooses to do that based on whether there is biz events that already exist with the `event.provider` that you have specified – otherwise it will start to generate new data. If you need fresh data, change the event.provider. You will also see events with the same event.provider but with `.temp` added – this is normal and is part of how the generator works. 
 
-Once the generator has run, you can go into the execution results and check that the results of the “generate_historical_data” step, you should see messages similar to the below.
+Once the generator has run, you can go into the execution results and check that the results of the “generate_historical_data” step.
 
 ### Validate Results
 
@@ -140,6 +140,92 @@ Validate your Business Flow.  Open the **Business Flow** app.  Locate the Busine
 Validate your business flow dashboard.  Open the **Dashboards** app.  Locate the dashboard that matches the name of your business process.  We'll explore it in more detail, and complete it, in an upcoming section.  For now, just make sure it was created successfully.
 
 ![Validate Dashboard](./img/biz-obs-auto_workflows_validate_dashboard.png)
+
+## Analyze Events
+
+TODO
+
+## Analyze Business Flow
+
+Use Business Flow to monitor and optimize business processes. Gain real-time visibility into key performance indicators and detailed analytics to improve customer satisfaction, increase efficiency, and reduce cost.
+
+With Business Flow, you can:
+
+- Define the sequence of important process steps or process milestones, including branches and loops
+- Define business exceptions to report at each step
+- Analyze individual end-to-end process flows
+- Detect dropped or stalled process flows
+- Track process KPIs, including end-to-end process timing and inter-step delays
+
+Review the **[Business Flow Terminology](https://docs.dynatrace.com/docs/shortlink/business-flow-reported-kpis#terminology){target=_blank}** to better understand the results presented to you by Dynatrace.
+
+Open the **Business Flow** app.  Locate the Business Flow that matches the name of your business process.
+
+Start by reviewing the entire end-to-end flow from top to bottom.  Identify the different steps in the business process, the data points automatically captured by Dynatrace, and how each unique flow is mapped out for you.
+
+![Business Flow End-to-End](./img/biz-obs-auto_biz_flow_analysis_end_to_end.gif)
+
+Next, investigate a single unique flow that dropped during the fourth step.  Click on the fourth step of the business flow.  From the unique flows by correlation id table on the right, change the `Filter` option to **Drop**.  Now, select the first correlation id.
+
+![Business Flow Filter Drops](./img/biz-obs-auto_biz_flow_analysis_drop_filter.png)
+
+The BizEvents matching this flow for this specific correlation id are shown.  You can see the timestamp for each step and any additional attributes that were captured in the BizEvent.
+
+![Analyze Drop Correlation Id](./img/biz-obs-auto_biz_flow_analysis_drop_correlationid.png)
+
+!!! tip "BizEvents in Context"
+    In a real scenario, the BizEvent should be captured with additional context that links the business grade data to underlying applications and infrastructure that makes the business step possible.  Typically this is a linked infrastructure entity (host, container, process, service, etc.), distributed trace data, and logs.  You can drill down into Notebooks to perform deeper analysis on these unique flows that experienced undesired results.
+    ![BizEvents with Context](./img/biz-obs-auto_biz_flow_analysis_telemetry_context_tip.png)
+
+Let's investigate a single unique flow that experienced a business exception that prevented our desired business outcome.  Click on the step that has business exceptions detected (most likely your fifth step).  From the unique flows by correlation id table on the right, change the `Filter` option to **With business exception**.  Now, select the first correlation id.
+
+![Business Flow Filter Exceptions](./img/biz-obs-auto_biz_flow_analysis_exception_filter.png)
+
+The BizEvents matching this flow for this specific correlation id are shown.  You can see the timestamp for each and any additional attributes that were captured in the BizEvent.  In real scenario, you could drill down into the step with the business exception and analyze the infrastructure, trace, and log details to understand exactly why this problem occurred.
+
+![Analyze Exception Correlation Id](./img/biz-obs-auto_biz_flow_analysis_exception_correlationid.png)
+
+## Business Flow Alerting
+
+The Business Flow **Business Flow KPIs** visible at the top provide four key performance indicators, calculated as a change in percent against the previous monitoring timeframe:
+
+- Business performance indicator (by default, revenue)
+- Fulfillment or conversion of unique flows in the business process
+- Errors and business exceptions in the monitored flows
+- Average flow duration (the time from start to end of a business process)
+
+### Configure KPI Alert
+
+Depending on the average flow duration, the Davis AI engine can be used to automatically detect anomalies with your business KPI.  Let's configure Davis to detect anomalies for the **Errors** KPI.  View the KPIs for your flow and click on `New Alert` for the `Errors` KPI.
+
+![View Flow KPI](./img/biz-obs-auto_biz_flow_alerts_view_kpi.png)
+
+The first step is to identify which Analyzer and corresponding anomaly detection method you want to use.  Select `Static threshold anomaly detection`.
+
+!!! tip "Davis Anomaly Detector Analyzers"
+    Dynatrace offers (3) [different analyzer options](https://docs.dynatrace.com/docs/discover-dynatrace/platform/davis-ai/anomaly-detection#concepts){target=_blank} in this context.
+
+    * Static thresholds: A static threshold represents a hard limit that a metric should not violate. Because static thresholds don't change over time, they are an important monitoring tool for defining critical boundaries of normal operation.
+    * Auto-adaptive thresholds: Auto-adaptive thresholds are a dynamic approach to baselining where the reference value for detecting anomalies changes over time. The main advantage over a static threshold is that the reference value dynamically adapts over time, and you don't have to know the threshold upfront.
+    * Seasonal baseline thresholds: A seasonal baseline represents a dynamic approach to baselining where the systems have distinct seasonality patterns. An example of a seasonal pattern is a metric that rises during business hours and lies low outside of them.
+
+For the `Threshold`, click on `Suggest values` to have Dynatrace pick a threshold based on observed historical data.  Set the `Alert condition` to `Alert if metric is above` because we want to alert on increased business exception errors.  The `Actor` should be left at your user account.  Davis will query and detect anomalies using the permissions of your user account.  Click `Save` to create the alert.
+
+![Configure Anomaly Detection for Errors](./img/biz-obs-auto_biz_flow_alerts_configure_detection_for_errors.png)
+
+**Authorize Davis Anomaly Detectors**
+
+You need to authorize Davis Anomaly Detection to execute queries on your behalf.  If you haven't done that already, then open the **Davis Anomaly Detection** app.  In the top right corner, click on the gear icon, and click `Authorization Settings`.
+
+![Davis Anomaly Detectors](./img/biz-obs-auto_biz_flow_alerts_davis_anomaly_detectors_list.png)
+
+Click on `Select all` to grant Davis Anomaly Detection access to query all data types on your behalf.  Note: if your user account doesn't have access to query a certain data type, then of course Davis won't be able to query it on your behalf.
+
+![Give Davis Permissions](./img/biz-obs-auto_biz_flow_alerts_davis_anomaly_auth_settings.png)
+
+### Configure Alerting Workflow
+
+TODO
 
 ## Conclusion
 

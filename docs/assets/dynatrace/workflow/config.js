@@ -30,8 +30,8 @@ export default async function ({ execution_id }) {
   // Note: Step 1 doesn't use any of the numbers and the last step cannot loop.
   const PROCESS_STEPS = [
     ["PROCESS STEP 0 PLACEHOLDER", "process.step.0.placeholder"],
-    ["PROCESS STEP 1 PLACEHOLDER", "process.step.1.placeholder", 5, 0.1, 0.2, false, 1],
-    ["PROCESS STEP 2 PLACEHOLDER", "process.step.2.placeholder", 1, 0.1, 0.2, true, 3],
+    ["PROCESS STEP 1 PLACEHOLDER", "process.step.1.placeholder", 0, 0.1, 0.2, false, 1],
+    ["PROCESS STEP 2 PLACEHOLDER", "process.step.2.placeholder", 0, 0.1, 0.2, true, 3],
     ["PROCESS STEP 3 PLACEHOLDER", "process.step.3.placeholder", 1, 1, 2, false, 1],
     ["PROCESS STEP 4 PLACEHOLDER", "process.step.4.placeholder", 5, 0.5, 1, false, 1],
     ["PROCESS OPTIONAL STEP 5 PLACEHOLDER", "process.optional.step.5.placeholder", 5, 0.5, 1, false, 1],

@@ -19,6 +19,7 @@
 A **Customer Journey** is the path a user takes while interacting with a digital product or service, focusing on their **experience** and **actions**.
 
 **Key Characteristics**:
+
 - Begins with a user’s **intent** (e.g., searching for a product)
 - Involves **digital touchpoints** (e.g., search, click, add to cart)
 - Ends when the user completes a **goal** (e.g., placing an order)
@@ -40,6 +41,7 @@ What steps do you take when buying something online? That’s your customer jour
 A **Business Journey** is the **end-to-end operational process** that begins with a customer interaction and ends with a **business outcome**.
 
 **Key Characteristics**:
+
 - Triggered by a customer action (e.g., order placed)
 - Involves **backend systems** (e.g., payment, inventory, shipping)
 - Ends with a **business result** (e.g., item delivered, revenue recorded)
@@ -67,8 +69,6 @@ What happens behind the scenes after you click “Buy Now”? That’s the busin
 ![Customer Journey vs Business Journey](./img/cus-vs-bus_user_business_journey_diagram.png)
 
 ### Summary
-
-✅ **Summary**
 
 - **Customer Journey** = What the user does and experiences
 - **Business Journey** = What the business does to fulfill that experience

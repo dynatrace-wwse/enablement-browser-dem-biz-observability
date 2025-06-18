@@ -15,9 +15,9 @@ In order to demonstrate end-to-end business process observability in this lab, w
 
 Download the Workflow template and configuration code snippet.
 
-[Workflow Template](./assets/dynatrace/workflow/wf_business_data_generator_3008.json)
+[Workflow Template](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/wf_business_data_generator_3008.json){target=_blank}
 
-[Configuration Code Snippet](./assets/dynatrace/workflow/config.js)
+[Configuration Code Snippet](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/config.js){target=_blank}
 
 ### Update Code Snippet
 
@@ -161,6 +161,9 @@ With Business Flow, you can:
 - Detect dropped or stalled process flows
 - Track process KPIs, including end-to-end process timing and inter-step delays
 
+!!! tip "Key Performance Indicator (KPI)"
+    A measurable value that reflects how effectively a business is achieving its strategic objectives. In the context of business outcomes, KPIs help track progress toward goals such as revenue growth, customer satisfaction, or operational efficiency. By monitoring KPIs, organizations can make data-driven decisions and quickly identify areas needing improvement.
+
 Review the **[Business Flow Terminology](https://docs.dynatrace.com/docs/shortlink/business-flow-reported-kpis#terminology){target=_blank}** to better understand the results presented to you by Dynatrace.
 
 Open the **Business Flow** app.  Locate the Business Flow that matches the name of your business process.
@@ -242,6 +245,7 @@ Combining business-grade data with observability data in a single dashboard is e
 Our Workflow has automatically added a dashboard we can use as a template to start understanding the health of our end-to-end business process in context of the technology that powers it.
 
 **Goals:**
+
 * Modify dashboard to show the steps of our business process (5 steps)
 * Update the first column with the first step, focusing on the customer journey outcome and the business revenue KPI
 * Update the fourth column with the fourth step, focusing on exceptions and errors in the business journey
@@ -251,6 +255,8 @@ Our Workflow has automatically added a dashboard we can use as a template to sta
     Use the concepts learned in this lab and the information provided by Microsoft CoPilot to complete the dashboard, specifically the remaining 2 columns and business process steps, on your own.
 
 ### Align Business Process
+
+Modify the markdown tiles at the top of the dashboard.  Change the process steps to align and match those of your business process, specifically the 5 key steps in the process.  Update the KPI based on the information provided by Microsoft CoPilot.
 
 ![Dashboard Align Business Process](./img/biz-obs-auto_dashboard_align_business_process.png)
 

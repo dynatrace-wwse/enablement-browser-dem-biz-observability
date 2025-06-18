@@ -370,6 +370,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#identify-multi-step-business-process-with-microsoft-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identify Multi-step Business Process with Microsoft CoPilot
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -533,6 +542,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#identify-multi-step-business-process-with-microsoft-copilot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Identify Multi-step Business Process with Microsoft CoPilot
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -588,9 +606,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Install RUM Injection Extension for Chrome</li>
 <li>Install Dynatrace Session Replay Extension for Chrome</li>
 <li>Identify public-facing business website<ul>
-<li>Identify multi-page business flow sequence</li>
+<li>Identify multi-page customer journey</li>
 </ul>
 </li>
+<li>Identify multi-step business process with Microsoft CoPilot</li>
 </ul>
 <h3 id="install-rum-injection-extension-for-chrome">Install RUM Injection Extension for Chrome<a class="headerlink" href="#install-rum-injection-extension-for-chrome" title="Permanent link">#</a></h3>
 <p>Open Chrome and navigate to <strong><a href="https://github.com/dynatrace-wwse/rum-injection-demo" target="_blank">https://github.com/dynatrace-wwse/rum-injection-demo</a></strong>, click the <code>Code</code> button, then <code>Download ZIP</code></p>
@@ -608,7 +627,37 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Install the extension.</p>
 <p><img alt="Install Extension" src="../img/prereq_session_replay_chrome_extension.gif" /></p>
 <h3 id="identify-public-facing-business-website">Identify Public-facing Business Website<a class="headerlink" href="#identify-public-facing-business-website" title="Permanent link">#</a></h3>
-<p>You will need a public-facing business website for this lab.</p>
+<div class="admonition tip">
+<p class="admonition-title">Public Website</p>
+<p>For this lab guide, we will reference Walmart's website.  Walmart is chosen due to their brand recognition, ecommerce platform, typical end-to-end business processes for their industry, and general fit for this exercise.  This lab, and the authors of this lab, have no affiliation to Walmart, their business, their observability strategy, or anything of the like.  All references to Walmart in this lab are from public facing non-confidential sources gathered through Microsoft CoPilot. </p>
+</div>
+<p>You will need a public-facing business website for this lab.  Identify a multi-step customer journey on that business website.</p>
+<p>For example:</p>
+<ol>
+<li>Homepage</li>
+<li>Search Product</li>
+<li>View Product</li>
+<li>Add to Cart</li>
+<li>Checkout</li>
+<li>Place Order</li>
+</ol>
+<p>You can/should skip any steps that require actual payment or personal information, as this is a training workshop.</p>
+<h3 id="identify-multi-step-business-process-with-microsoft-copilot">Identify Multi-step Business Process with Microsoft CoPilot<a class="headerlink" href="#identify-multi-step-business-process-with-microsoft-copilot" title="Permanent link">#</a></h3>
+<p>Use Microsoft CoPilot to identify the details of a multi-step business process.</p>
+<p>In the text below, replace <code>COMPANY</code>, <code>COUNTRY</code>, <code>FIRST STEP</code>, and <code>LAST STEP</code> with the details for your company.</p>
+<div class="highlight"><pre><span></span><code>In the below prompt, replace:
+{Company Name} with COMPANY
+{Country} with COUNTRY
+{Business Process} with Business Process from FIRST STEP to LAST STEP
+
+I’m working with {Company Name} in {Country} to build a business analytics dashboard that maps out the end-to-end business process of {Business Process} and ties IT context to business KPIs. Provide 2 outputs and ensure to use {Company Name}’s terminology and language.
+
+Output 1: A simple numbered list of the logical steps in the process. 
+Output 2: A detailed explanation for all the logical steps, critical non-technical business KPIs for each step and for the entire process, and IT and technology tied to each of the steps. 
+
+If there are more than 5 steps, simplify to the 5 most business-critical steps.
+</code></pre></div>
+<p>Save the output of the prompt somewhere that you can access it later, such as in a Dynatrace Notebook.</p>
 <h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>
 <p>In the next section, we'll explore the differences between a Customer Journey and a Business Journey.</p>
 <div class="grid cards">

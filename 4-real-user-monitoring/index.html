@@ -402,6 +402,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-web-application-in-dynatrace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up Web Application in Dynatrace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-extension-for-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Extension for Demo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-security-policy-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Security Policy Warnings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Content Security Policy Warnings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temporarily-override-content-security-policy-using-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temporarily Override Content-Security-Policy using DevTools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#continue" class="md-nav__link">
     <span class="md-ellipsis">
       Continue
@@ -509,6 +551,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-web-application-in-dynatrace" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up Web Application in Dynatrace
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-extension-for-demo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Extension for Demo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-security-policy-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Security Policy Warnings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Content Security Policy Warnings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temporarily-override-content-security-policy-using-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temporarily Override Content-Security-Policy using DevTools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#continue" class="md-nav__link">
     <span class="md-ellipsis">
       Continue
@@ -552,6 +636,83 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>TODO</p>
 <h3 id="sub-step">Sub-Step<a class="headerlink" href="#sub-step" title="Permanent link">#</a></h3>
 <p>TODO</p>
+<h2 id="setting-up-web-application-in-dynatrace">Setting Up Web Application in Dynatrace<a class="headerlink" href="#setting-up-web-application-in-dynatrace" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p>Navigate to the hub and search for "Web application monitoring via manual insertion" and click “Set up”<br />
+<img alt="alt text" src="docs/imgs/hub-add-webapp.png" /></p>
+</li>
+<li>
+<p>Type in the domain of the website you want to monitor and click "add web application"<br />
+<img alt="alt text" src="docs/imgs/add-real-user-monitoring-website.png" /></p>
+</li>
+<li>
+<p>Copy the src url, you’ll enter this into the extension <br />
+<img alt="alt text" src="docs/imgs/add-real-user-monitoring-copy-js-tag.png" /></p>
+</li>
+<li>
+<p>Click <code>View Application</code> this brings you to the application screen  </p>
+</li>
+<li>
+<p>Check the 3 dots and select edit<br />
+<img alt="alt text" src="docs/imgs/web-application-access-settings.png" /></p>
+</li>
+<li>
+<p>Under General Settings, navigate to "enablement and cost control", toggle on "Enable New Real User Monitoring Experience" and "Enable Session Replay Classic" and click "Save Changes"<br />
+<img alt="alt text" src="docs/imgs/enable-new-experience-and-replay.png" /></p>
+</li>
+</ol>
+<h2 id="configure-extension-for-demo">Configure Extension for Demo<a class="headerlink" href="#configure-extension-for-demo" title="Permanent link">#</a></h2>
+<ol>
+<li>
+<p>Navigate to <code>Web Application Injection Setup</code> settings page in Dynatrace, and copy the src value from the javaScript tag snippet
+<img alt="injection setup" src="docs/imgs/injection-setup-settings.png" /></p>
+</li>
+<li>
+<p>Click the <code>Extension</code> icon <img alt="Extension Button" src="docs/imgs/extension-button.png" />  in toolbar, then Click <code>Dynatrace RUM Injector</code> extension.</p>
+</li>
+<li>
+<p>Enter the domain of the site you wish to demo on, then paste your javascript src url from step #1, and hit <code>Save</code>
+<img alt="configure extension" src="docs/imgs/configure-extension.gif" /></p>
+</li>
+</ol>
+<h2 id="content-security-policy-warnings">Content Security Policy Warnings<a class="headerlink" href="#content-security-policy-warnings" title="Permanent link">#</a></h2>
+<p>You may encounter sites that restrict remote content loading and request using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security Policy (CSP)</a>. </p>
+<blockquote>
+<p>Content Security Policy (CSP) is a feature that helps to prevent or minimize the risk of certain types of security threats. It consists of a series of instructions from a website to a browser, which instruct the browser to place restrictions on the things that the code comprising the site is allowed to do.
+The primary use case for CSP is to control which resources, in particular JavaScript resources, a document is allowed to load. This is mainly used as a defense against <a href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting">cross-site scripting (XSS)</a> attacks, in which an attacker is able to inject malicious code into the victim's site.</p>
+</blockquote>
+<p>Since we are injecting our RUM locally via an extension, you may see these warnings in your DevTool Console, for example:</p>
+<p><img alt="csp-warning-example" src="docs/imgs/csp-warning-example.png" /></p>
+<h3 id="temporarily-override-content-security-policy-using-devtools">Temporarily Override Content-Security-Policy using DevTools<a class="headerlink" href="#temporarily-override-content-security-policy-using-devtools" title="Permanent link">#</a></h3>
+<ol>
+<li>
+<p>Navigate to the site you plan to demo on, and was configured in your extension settings</p>
+</li>
+<li>
+<p>Open the Developer Tools <code>View &gt; Developer &gt; Developer Tools</code>
+<img alt="Open Developer Tools" src="docs/imgs/open-devtools.png" /></p>
+</li>
+<li>
+<p>Switch to the <code>Sources</code> tab, then <code>Overrides</code> sub-tab. </p>
+</li>
+<li>
+<p>Click <code>Select folder for overrides</code></p>
+</li>
+<li>
+<p>Navigate to <code>overrides</code> directory in you unzipped extension folder and press <code>Select</code>
+<img alt="Enabled Source Overrides in DevTools" src="docs/imgs/devtools-enable-overrides.gif" /></p>
+</li>
+<li>
+<p>Refresh the page and you should no any CSP warning, and the RUM extension and beacon calls should now be seen in the network tab
+<img alt="Validate Overrides Are Functioning" src="docs/imgs/validate-csp-overrides-and-functionality.gif" /></p>
+</li>
+</ol>
+<blockquote>
+<p>⚠️ <strong>Warning these overrides only function while the DevTool window is open.  Be sure to leave the DevTool open for the entire time you are running your demo</strong> ⚠️</p>
+<p>Normally, <strong>RUM</strong> sessions end on of the ways documented here: <a href="">https://docs.dynatrace.com/docs/shortlink/user-session#user-session-end</a></p>
+<p>However, we want to be able to create a bunch of sessions quickly without having to close the browser or wait for inactivity. To do this, navigate to the console in Chrome Dev Tools and type <code>dtrum.endSession()</code> and hit enter </p>
+</blockquote>
 <h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>
 <p>In the next section, we'll observe business outcomes with real user monitoring.</p>
 <div class="grid cards">

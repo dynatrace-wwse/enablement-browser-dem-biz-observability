@@ -1,15 +1,15 @@
 # Business Observability Automation
 --8<-- "snippets/send-bizevent/6-business-observability-automation.js"
 
-Synopsis
+Dynatrace can be used to automate business observability use cases by orchestrating actions based on real-time business and system events. Through the Business Flow app, organizations can define and monitor key business processes—like order fulfillment or loan applications—using business events enriched with context from Dynatrace’s Smartscape topology. Workflows can automatically trigger alerts, notifications, or remediation actions when anomalies or service level objectives (SLOs) are breached, ensuring timely responses to issues that impact business outcomes. For example, a Workflow might notify business teams and open a service ticket if the average order processing time exceeds a defined threshold, helping align IT operations with business performance goals.
 
 <div class="grid cards" markdown>
-- [Learn More:octicons-arrow-right-24:](https://docs.dynatrace.com/docs/ingest-from/setup-on-k8s/deployment/k8s-log-monitoring){target="_blank"}
+- [Learn More:octicons-arrow-right-24:](https://docs.dynatrace.com/docs/shortlink/use-case-process-monitoring){target="_blank"}
 </div>
 
 ## Configure Workflow
 
-TODO
+In order to demonstrate end-to-end business process observability in this lab, we'll utilize a [Dynatrace Workflow](https://docs.dynatrace.com/docs/analyze-explore-automate/workflows/manage-workflows/workflows-upload){target=_blank} combined with Microsoft CoPilot.
 
 ### Download Workflow Assets
 
@@ -96,7 +96,11 @@ Run the Workflow manually by click on `Run`.
 
 ![Run Workflow](./img/biz-obs-auto_workflows_run_workflow_manually_first_time.png)
 
-Validate that the Workflow runs successfully.  Once validated, edit the Workflow, toggle on the `Schedule` trigger so that it executes every 5 minutes.  Click on `Save` to save the changes.  Then click on `Deploy` to activate and deploy the Workflow automation.
+Validate that the Workflow runs successfully.  
+
+![Successful Workflow Execution](./img/biz-obs-auto_workflows_successful_first_run.png)
+
+Once validated, edit the Workflow, toggle on the `Schedule` trigger so that it executes every 5 minutes.  Click on `Save` to save the changes.  Then click on `Deploy` to activate and deploy the Workflow automation.
 
 ![Deploy Workflow](./img/biz-obs-auto_workflows_schedule_and_deploy.png)
 
@@ -223,9 +227,150 @@ Click on `Select all` to grant Davis Anomaly Detection access to query all data 
 
 ![Give Davis Permissions](./img/biz-obs-auto_biz_flow_alerts_davis_anomaly_auth_settings.png)
 
+After some period of time, the anomaly detector should evaluate successfully.  If not, click the status indicator and address the underlying errors.
+
+![Anomaly Detector Success](./img/biz-obs-auto_biz_flow_alerts_davis_anomaly_success.png)
+
 ### Configure Alerting Workflow
 
 TODO
+
+## Business Observability Dashboard
+
+Combining business-grade data with observability data in a single dashboard is essential for aligning technical performance with business outcomes. This integration allows teams to quickly understand how system behavior — like latency or errors - impacts key metrics such as revenue, user engagement, or transaction volume. It also helps prioritize incidents based on business impact and supports more informed, cross-functional decision-making. Ultimately, it bridges the gap between technical operations and strategic goals, enabling both proactive optimization and clearer executive visibility.
+
+Our Workflow has automatically added a dashboard we can use as a template to start understanding the health of our end-to-end business process in context of the technology that powers it.
+
+**Goals:**
+* Modify dashboard to show the steps of our business process (5 steps)
+* Update the first column with the first step, focusing on the customer journey outcome and the business revenue KPI
+* Update the fourth column with the fourth step, focusing on exceptions and errors in the business journey
+* Update the fifth column with the fifth step, focusing on business journey conversions and measuring success
+
+!!! tip "Dashboard Completion"
+    Use the concepts learned in this lab and the information provided by Microsoft CoPilot to complete the dashboard, specifically the remaining 2 columns and business process steps, on your own.
+
+### Align Business Process
+
+![Dashboard Align Business Process](./img/biz-obs-auto_dashboard_align_business_process.png)
+
+### Customer Journey Outcome
+
+We will be editing the tiles for **Business KPI**, **Average order size**, and **Orders by loyalty tier** to reflect data and context for our business process step 1 representing the customer journey outcome.
+
+Begin by updating the Business KPI query.  Use the information from Microsoft CoPilot to align on the KPI and modify the query to use the revenue attribute from the first business process step.
+
+![Update Business KPI](./img/biz-obs-auto_dashboard_customer_outcome_update_business_kpi.png)
+
+Next, update the KPI chart query.  Use a query very similar to the previous one (Business KPI), but change the visualization so that it's not just a single value.  A timeseries chart of the KPI is recommended.
+
+![Update KPI Chart](./img/biz-obs-auto_dashboard_customer_outcome_update_kpi_chart.png)
+
+Finally, update the auxillary KPI query.  Choose a query that uses the information from the first business process.  For example, use the customer segmentation type to create a pie chart or categorical chart with multiple dimensions.
+
+![Update Segments](./img/biz-obs-auto_dashboard_customer_outcome_update_segments.png)
+
+### Business Exceptions
+
+We will be editing the tiles for **Business KPI**, **Shipping success rate**, and **Vouchers Offered** to reflect data and context for our business process step 4 focusing on business exceptions.
+
+Begin by updating the Business KPI query.  Use the information from Microsoft CoPilot to align on the KPI and modify the query to use the business exception events related to the fourth business process step.
+
+![Update Business KPI](./img/biz-obs-auto_dashboard_exceptions_update_business_kpi.png)
+
+Next, update the KPI chart query.  Use a query very similar to the previous one (Business KPI), but change the visualization so that it's not just a single value.  A timeseries chart of the KPI is recommended.
+
+![Update KPI Chart](./img/biz-obs-auto_dashboard_exceptions_update_kpi_chart.png)
+
+Finally, update the auxillary KPI query.  Choose a query that uses information from business exception events.  For example, use the first step's revenue attribute combined with the business exception.
+
+![Update Vouchers](./img/biz-obs-auto_dashboard_exceptions_update_vouchers.png)
+
+### Business Journey Conversions
+
+We will be editing the tiles for **Business KPI**, **Gold loyalty delivery time**, and **End-to-end order time** to reflect data and context for our business process step 4 focusing on business exceptions.
+
+Begin by updating the Business KPI query.  Use the information from Microsoft CoPilot to align on the KPI and modify the query to use the events from the final business process step.  You may need to include events from previous business steps to calculate the metric.
+
+![Update Business KPI](./img/biz-obs-auto_dashboard_conversions_update_business_kpi.png)
+
+Next, update the KPI chart query.  Use a query very similar to the previous one (Business KPI), but change the visualization so that it's not just a single value.  A timeseries chart of the KPI is recommended.
+
+![Update KPI Chart](./img/biz-obs-auto_dashboard_conversions_update_kpi_chart.png)
+
+Finally, update the auxillary KPI query.  Choose a query that uses information from the events from the final business process step.  Consider using the optional step event data as well.
+
+![Update CSAT](./img/biz-obs-auto_dashboard_conversions_update_csat.png)
+
+### Dashboard Completion
+
+Use the concepts learned in this lab and the information provided by Microsoft CoPilot to complete the dashboard, specifically the remaining 2 columns and business process steps, on your own.
+
+It's highly recommended to be creative and manipulate the data to match the information provided by Microsoft CoPilot.  However, if you need some additional guidance on completing the business KPIs and writing the DQL queries, here are some tips:
+
+Typically the KPI is one of the types below: 
+* Success rate of the step (typically one where you’ve defined an error) 
+* The time taken since a previous step
+* Comparison to a historical value (e.g. orders packed per hour now vs yesterday) 
+
+Choose one of these data KPI types and using the template DQL – populate the “Business KPI” tile, and also the description above the tiles. 
+
+**Time between two steps**
+
+``` 
+fetch bizevents 
+| filter event.provider == "<Your event provider>" 
+| filter event.type == "<First event type>" or event.type == "<Second event type>" 
+| summarize firstTime = takeMin(timestamp), secondTime = takeMax(timestamp), by:{<Correlation ID> } 
+| filterOut isNull(firstTime) or isNull(secondTime) 
+| fieldsAdd duration = secondTime - firstTime 
+| summarize averageTime = avg(duration)
+```
+
+**Success rate of step**
+
+``` 
+fetch bizevents 
+| filter event.provider == "<Your event provider>" 
+| filter startsWith(event.type, "<event.type of your step that errors>") 
+| summarize total = count(), success = countIf(event.type == "<event.type of your step that errors>") 
+| fieldsAdd percentage = toDouble(success) / toDouble(total) * 100 
+``` 
+
+**Comparison to previous time**
+
+```
+fetch bizevents, from: -1h
+| filter event.provider == "<Your event provider>" and event.type == "<event.type of step in question>" 
+| summarize valueNow= count(), by:{event.type} 
+| lookup [fetch bizevents, from: -24h, to:-23h | filter event.provider == "<Your event provider>" and event.type == "<event.type of step in question>" | summarize previousValue = count(), by:{event.type} ], sourceField:event.type, lookupField:event.type 
+| fieldsAdd percentageChange = ((toDouble(lookup.previousValue) - toDouble(valueNow)) / toDouble(valueNow)) * 100
+```
+ 
+Once this is done, populate the first “graph” underneath the tiles at the top. Typically this first graph will be related in some way to the tile at the top. For example: 
+
+If it’s success rate: Line graph the success rate over time + A donut graph of “failure” totals in different segments. 
+
+If it’s a time KPI, do something like: The time per segment in a line graph + The time per location in a categorical graph. 
+
+If it’s a comparison KPI: A line chart showing the value over time (possibly using thresholds to add some color).
+
+Next up is the graph at the bottom, this will be related to the step in some way but doesn’t have to be directly tied to the KPI. Some of the popular choices are: 
+
+Lost “flows” – for example mortgage applications that haven’t been touched in X hours. Related to the above, what’s the “revenue” impact of lost flows. Flows split by segment.
+
+**Lost items**
+
+``` 
+fetch bizevents 
+| filter event.provider == "<Your event provider
+| filter event.type == "<First event type>" or event.type == "<Second event type>"
+| summarize firstCount = countIf(event.type == "<First event type>"), secondCount = countIf(event.type == "<Second event provider>"),firstTime = takeFirst(timestamp), by:{<Correlation ID> }
+| fieldsAdd timeSinceFirstStep = (now() - firstTime)
+| filter secondCount == 0 and timeSinceFirstStep > toDuration(7200000000000) //Time in nanoseconds
+| makeTimeseries `Lost flows` = count(), time: firstTime, bins:50
+| fieldsAdd totalLostFlows = arraySum(`Lost flows`)
+```
 
 ## Conclusion
 

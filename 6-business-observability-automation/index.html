@@ -37,13 +37,13 @@
       
     
   <!-- Add scripts that need to run afterwards here -->
-   Create an agentless RUM application before GoLive
-   <!-- TODO: BeforeGoLive: Replace Agentless RUM Snippet
+  <!-- BeforeGoLive: Replace Agentless RUM Snippet
+  Create an agentless RUM application before GoLive
     1. Create an agentless application in Dynatrace from with convention 'dynatrace-wwse/repositoryname'
     2. https://hci34192.apps.dynatrace.com/ui/apps/dynatrace.classic.deploy.agentless/#install/agentless;gtf=-2h;gf=all
     <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/PLACEHOLDEr/REPLACE_WITH_YOUR_SNIPPET/1234abcd1234abcd_complete.js" crossorigin="anonymous"></script>
     -->
-    <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/145e12d594f/bf64904yne/6c910e7a6d2a6ab4_complete.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/145e12d594f/bf64904yne/91bdc5237ab9eea9_complete.js" crossorigin="anonymous"></script>
 
     
       
@@ -1016,10 +1016,12 @@ If there are more than 5 steps, simplify to the 5 most business-critical steps.
 <h3 id="dashboard-completion">Dashboard Completion<a class="headerlink" href="#dashboard-completion" title="Permanent link">#</a></h3>
 <p>Use the concepts learned in this lab and the information provided by Microsoft CoPilot to complete the dashboard, specifically the remaining 2 columns and business process steps, on your own.</p>
 <p>It's highly recommended to be creative and manipulate the data to match the information provided by Microsoft CoPilot.  However, if you need some additional guidance on completing the business KPIs and writing the DQL queries, here are some tips:</p>
-<p>Typically the KPI is one of the types below: 
-* Success rate of the step (typically one where you’ve defined an error) 
-* The time taken since a previous step
-* Comparison to a historical value (e.g. orders packed per hour now vs yesterday) </p>
+<p>Typically the KPI is one of the types below:</p>
+<ul>
+<li>Success rate of the step (typically one where you’ve defined an error) </li>
+<li>The time taken since a previous step</li>
+<li>Comparison to a historical value (e.g. orders packed per hour now vs yesterday) </li>
+</ul>
 <p>Choose one of these data KPI types and using the template DQL – populate the “Business KPI” tile, and also the description above the tiles. </p>
 <p><strong>Time between two steps</strong></p>
 <div class="highlight"><pre><span></span><code>fetch bizevents 
@@ -1060,6 +1062,8 @@ If there are more than 5 steps, simplify to the 5 most business-critical steps.
 | makeTimeseries `Lost flows` = count(), time: firstTime, bins:50
 | fieldsAdd totalLostFlows = arraySum(`Lost flows`)
 </code></pre></div>
+<p>Here is the completed example, for Walmart's Online Order Fulfillment business process.</p>
+<p><img alt="Dashboard Complete" src="../img/biz-obs-auto_dashboard_completed_example.png" /></p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">#</a></h2>
 <p>TODO: summary</p>
 

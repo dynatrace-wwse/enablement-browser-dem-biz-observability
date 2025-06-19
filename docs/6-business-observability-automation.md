@@ -145,9 +145,9 @@ Validate your business flow dashboard.  Open the **Dashboards** app.  Locate the
 
 ![Validate Dashboard](./img/biz-obs-auto_workflows_validate_dashboard.png)
 
+<!-- TODO: Analyze Events in Notebook>
 ## Analyze Events
-
-TODO
+-->
 
 ## Analyze Business Flow
 
@@ -234,9 +234,9 @@ After some period of time, the anomaly detector should evaluate successfully.  I
 
 ![Anomaly Detector Success](./img/biz-obs-auto_biz_flow_alerts_davis_anomaly_success.png)
 
+<!-- TODO: Configure Alerting Workflow
 ### Configure Alerting Workflow
-
-TODO
+-->
 
 ## Business Observability Dashboard
 
@@ -385,4 +385,4 @@ Here is the completed example, for Walmart's Online Order Fulfillment business p
 
 ## Conclusion
 
-TODO: summary
+<!-- TODO: Summarize and Conclude -->

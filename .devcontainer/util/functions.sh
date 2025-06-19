@@ -711,3 +711,80 @@ deployCronJobs() {
   printInfoSection "Deploying CronJobs for Astroshop for this lab"
   kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/manifests/cronjobs.yaml
 }
+
+deployEasytravelCodespaces(){
+  
+  printInfoSection "Deploying Easytravel Codespaces"
+
+  # Namespace
+
+  printInfo "Creating namespace 'easytravel-codespaces' with kubectl"
+
+  kubectl create namespace easytravel-codespaces
+
+  # Database
+
+  printInfo "Deploy 'easytravel-mongodb' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/easytravel-mongodb.yaml
+
+  waitForAllPods easytravel-codespaces
+
+  # Backend
+
+  printInfo "Deploy 'easytravel-backend' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/easytravel-backend.yaml
+
+  waitForAllPods easytravel-codespaces
+
+  # Frontend
+
+  printInfo "Deploy 'easytravel-frontend' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/easytravel-frontend.yaml
+
+  waitForAllPods easytravel-codespaces
+
+  # Angular
+
+  printInfo "Deploy 'easytravel-angular-frontend' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/easytravel-angular-frontend.yaml
+
+  waitForAllPods easytravel-codespaces
+
+  # Nginx
+
+  printInfo "Deploy 'easytravel-nginx' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/easytravel-nginx.yaml
+
+  waitForAllPods easytravel-codespaces
+
+  # Load Generator
+
+  printInfo "Deploy 'loadgenerator' deployment and service"
+
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/easytravel/manifests/loadgenerator.yaml
+
+  # Scale Replicas for Angular Load Generator, default 0
+
+  # kubectl scale deployment angular-loadgenerator --replicas=1 -n easytravel-codespaces
+
+  waitForAllPods easytravel-codespaces
+
+  # Expose Easytravel
+
+  printInfo "Exposing Easytravel Codespaces in your dev.container via NodePort 30100"
+
+  printInfo "Change easytravel-codespaces-angular-nginx-service service from LoadBalancer to NodePort"
+  kubectl patch service easytravel-codespaces-angular-nginx-service --namespace=easytravel-codespaces --patch='{"spec": {"type": "NodePort"}}'
+
+  printInfo "Exposing the easytravel-codespaces-angular-nginx-service in NodePort 30100"
+  kubectl patch service easytravel-codespaces-angular-nginx-service --namespace=easytravel-codespaces --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
+
+  waitForAllPods easytravel-codespaces
+
+  printInfo "Easytravel Codespaces deployed successfully!"
+}

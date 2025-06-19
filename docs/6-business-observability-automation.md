@@ -314,7 +314,8 @@ Use the concepts learned in this lab and the information provided by Microsoft C
 
 It's highly recommended to be creative and manipulate the data to match the information provided by Microsoft CoPilot.  However, if you need some additional guidance on completing the business KPIs and writing the DQL queries, here are some tips:
 
-Typically the KPI is one of the types below: 
+Typically the KPI is one of the types below:
+
 * Success rate of the step (typically one where you’ve defined an error) 
 * The time taken since a previous step
 * Comparison to a historical value (e.g. orders packed per hour now vs yesterday) 
@@ -377,6 +378,10 @@ fetch bizevents
 | makeTimeseries `Lost flows` = count(), time: firstTime, bins:50
 | fieldsAdd totalLostFlows = arraySum(`Lost flows`)
 ```
+
+Here is the completed example, for Walmart's Online Order Fulfillment business process.
+
+![Dashboard Complete](./img/biz-obs-auto_dashboard_completed_example.png)
 
 ## Conclusion
 

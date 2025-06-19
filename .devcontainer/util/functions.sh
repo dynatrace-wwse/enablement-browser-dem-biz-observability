@@ -405,10 +405,10 @@ deployCloudNative() {
     kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
 
     printInfo "Log capturing will be handled by the Host agent."
-    # We wait for 5 seconds for the pods to be scheduled, otherwise it will mark it as passed since the pods have not been scheduled
+    
+    # we wait for the AG to be scheduled
     waitForPod dynatrace activegate
     
-    #FIXME: Verify dependency of AG and OS being ready.
     waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
@@ -421,9 +421,14 @@ deployApplicationMonitoring() {
     # Check if the Webhook has been created and is ready
     kubectl -n dynatrace wait pod --for=condition=ready --selector=app.kubernetes.io/name=dynatrace-operator,app.kubernetes.io/component=webhook --timeout=300s
 
-    kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+    kubectl -n dynatrace apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
+    
+    # we wait for the AG to be scheduled
+    waitForPod dynatrace activegate
+
     #FIXME: When deploying in AppOnly we need to capture the logs, either with log module or FluentBit
-    waitForAllPods dynatrace
+    #FIXME: Get log module "latest" is it possible for prod and sprint? verify
+    waitForAllReadyPods dynatrace
   else
     printInfo "Not deploying the Dynatrace Operator, no credentials found"
   fi
@@ -475,26 +480,35 @@ dynatraceDeployOperator() {
 }
 
 
-
-
 generateDynakube(){
+    # SET API URL
+    API="/api"
+    DT_API_URL=$DT_TENANT$API
+    
+    # Read the actual hostname in case changed during instalation
+    CLUSTERNAME=$(hostname)
+    export CLUSTERNAME
+
     # Generate DynaKubeSkel with API URL
-    sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
+    sed -e 's~apiUrl: https://ENVIRONMENTID.live.dynatrace.com/api~apiUrl: '"$DT_API_URL"'~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-skel-head.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
 
     # ClusterName for API
-    sed -i 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # Networkzone
-    sed -i 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # HostGroup
-    sed -i 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-    # ActiveGate Group
-    sed -i 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml
-
-    # Create Dynakube for CloudNative 
-    sed -e 's~MONITORINGMODE:~cloudNativeFullStack:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    sed -i 's~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "CLUSTERNAME"~feature.dynatrace.com/automatic-kubernetes-api-monitoring-cluster-name: "'"$CLUSTERNAME"'"~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    # Replace Networkzone
+    sed -i 's~networkZone: CLUSTERNAME~networkZone: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+    # Add ActiveGate config (added first so its applied to both CNFS and AppOnly)
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-activegate.yaml >> $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
     
-    # Create Dynakube for ApplicationMonitoring
-    sed -e 's~MONITORINGMODE:~applicationMonitoring: {}:~' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-applicationmonitoring.yaml
+    # Set ActiveGate Group 
+    sed -i 's~group: CLUSTERNAME~group: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml
+
+    # Generate CloudNative Body (head + CNFS)
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-cloudnative.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+    # Set CloudNative HostGroup
+    sed -i 's~hostGroup: CLUSTERNAME~hostGroup: '$CLUSTERNAME'~g' $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-cloudnative.yaml
+
+    # Generate AppOnly Body
+    cat $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-skel-head.yaml $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/dynakube-body-apponly.yaml > $CODESPACE_VSCODE_FOLDER/.devcontainer/yaml/gen/dynakube-apponly.yaml
 
 }
 
@@ -503,11 +517,6 @@ deployOperatorViaKubectl(){
   printInfoSection "Deploying Operator via kubectl"
 
   saveReadCredentials
-  API="/api"
-  DT_API_URL=$DT_TENANT$API
-  
-  # Read the actual hostname in case changed during instalation
-  CLUSTERNAME=$(hostname)
 
   kubectl create namespace dynatrace
 
@@ -523,11 +532,6 @@ deployOperatorViaKubectl(){
 deployOperatorViaHelm(){
 
   saveReadCredentials
-  API="/api"
-  DT_API_URL=$DT_TENANT$API
-  
-  # Read the actual hostname in case changed during instalation
-  CLUSTERNAME=$(hostname)
 
   helm install dynatrace-operator oci://public.ecr.aws/dynatrace/dynatrace-operator --create-namespace --namespace dynatrace --atomic
 
@@ -538,6 +542,52 @@ deployOperatorViaHelm(){
 
 }
 
+undeployOperatorViaHelm(){
+
+  helm uninstall dynatrace-operator --namespace dynatrace
+
+}
+
+
+deployAITravelAdvisorApp(){
+  printInfoSection "Deploying AI Travel Advisor App & it's LLM"
+
+  kubectl apply -f /workspaces/$RepositoryName/app/k8s/namespace.yaml
+
+  kubectl -n ai-travel-advisor create secret generic dynatrace --from-literal=token=$DT_TOKEN --from-literal=endpoint=$DT_TENANT/api/v2/otlp
+
+  # Start OLLAMA
+  printInfo "Deploying our LLM => Ollama"
+  kubectl apply -f /workspaces/$RepositoryName/app/k8s/ollama.yaml
+  waitForPod ai-travel-advisor ollama
+  printInfo "Waiting for Ollama to get ready"
+  kubectl -n ai-travel-advisor wait --for=condition=Ready pod --all --timeout=10m
+  printInfo "Ollama is ready"
+
+  # Start Weaviate
+  printInfo "Deploying our VectorDB => Weaviate"
+  kubectl apply -f /workspaces/$RepositoryName/app/k8s/weaviate.yaml
+
+  waitForPod ai-travel-advisor weaviate
+  printInfo "Waiting for Weaviate to get ready"
+  kubectl -n ai-travel-advisor wait --for=condition=Ready pod --all --timeout=10m
+  printInfo "Weaviate is ready"
+
+
+  # Start AI Travel Advisor
+  printInfo "Deploying AI App => AI Travel Advisor"
+  kubectl apply -f /workspaces/$RepositoryName/app/k8s/ai-travel-advisor.yaml
+  
+  waitForPod ai-travel-advisor ai-travel-advisor
+  printInfo "Waiting for AI Travel Advisor to get ready"
+  kubectl -n ai-travel-advisor wait --for=condition=Ready pod --all --timeout=10m
+  printInfo "AI Travel Advisor is ready"
+
+  # Define the NodePort to expose the app from the Cluster
+  kubectl patch service ai-travel-advisor --namespace=ai-travel-advisor --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
+  printInfo "AI Travel Advisor is available via NodePort=30100"
+
+}
 
 deployTodoApp(){
   printInfoSection "Deploying Todo App"
@@ -595,7 +645,7 @@ _buildLabGuide(){
   cd -
 }
 
-_deployAstroshop(){
+deployAstroshop(){
   printInfoSection "Deploying Astroshop"
 
   # read the credentials and variables
@@ -622,8 +672,15 @@ _deployAstroshop(){
 
   helm upgrade --install astroshop -f $CODESPACE_VSCODE_FOLDER/.devcontainer/astroshop/helm/dt-otel-demo-helm-deployments/values.yaml --set default.image.repository=docker.io/shinojosa/astroshop --set default.image.tag=1.12.0 --set collector_tenant_endpoint=$DT_OTEL_ENDPOINT --set collector_tenant_token=$DT_INGEST_TOKEN -n astroshop $CODESPACE_VSCODE_FOLDER/.devcontainer/astroshop/helm/dt-otel-demo-helm
 
-  printInfo "Stopping all cronjobs from Demo Live since they are not needed with this scenario"
+  printInfo "Exposing Astroshop in your dev.container via NodePort 30100"
 
+  printInfo "Change astroshop-frontendproxy service from LoadBalancer to NodePort"
+  kubectl patch service astroshop-frontendproxy --namespace=astroshop --patch='{"spec": {"type": "NodePort"}}'
+
+  printInfo "Exposing the astroshop-frontendproxy in NodePort 30100"
+  kubectl patch service astroshop-frontendproxy --namespace=astroshop --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":30100}]'
+
+  printInfo "Stopping all cronjobs from Demo Live since they are not needed with this scenario"
   kubectl get cronjobs -n astroshop -o json | jq -r '.items[] | .metadata.name' | xargs -I {} kubectl patch cronjob {} -n astroshop --patch '{"spec": {"suspend": true}}'
 
   # Listing all cronjobs
@@ -648,4 +705,9 @@ showOpenPorts(){
 
 deployGhdocs(){
   mkdocs gh-deploy
+}
+
+deployCronJobs() {
+  printInfoSection "Deploying CronJobs for Astroshop for this lab"
+  kubectl apply -f $CODESPACE_VSCODE_FOLDER/.devcontainer/manifests/cronjobs.yaml
 }

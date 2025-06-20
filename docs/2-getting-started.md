@@ -7,6 +7,7 @@ You will need full administrator access to a Dynatrace SaaS tenant with a DPS li
 
 * Install RUM Injection Extension for Chrome
 * Install Dynatrace Session Replay Extension for Chrome
+* Install Business Flow app
 * Identify public-facing business website
     - Identify multi-page customer journey
 * Identify multi-step business process with Microsoft CoPilot
@@ -41,10 +42,16 @@ Install the extension.
 
 ![Install Extension](./img/prereq_session_replay_chrome_extension.gif)
 
+### Install Business Flow app
+
+In your Dynatrace tenant, launc the **Hub** app.  Locate and install the **Business Flow** app.
+
+![Business Flow app](./img/prereq-install_business_flow_app.png)
+
 ### Identify Public-facing Business Website
 
-!!! tip "Public Website"
-    For this lab guide, we will reference Walmart's website.  Walmart is chosen due to their brand recognition, ecommerce platform, typical end-to-end business processes for their industry, and general fit for this exercise.  This lab, and the authors of this lab, have no affiliation to Walmart, their business, their observability strategy, or anything of the like.  All references to Walmart in this lab are from public facing non-confidential sources gathered through Microsoft CoPilot. 
+!!! tip "Example Business Website"
+    For this lab guide, we will reference Google's flight tracking website.  Google is chosen due to their brand recognition, digital platform, typical end-to-end customer journey for their industry, and general fit for this exercise.  This lab, and the authors of this lab, have no affiliation to Google, their business, their observability strategy, or anything of the like.  All references to Google in this lab are from public facing non-confidential sources gathered through Microsoft CoPilot.
 
 You will need a public-facing business website for this lab.  Identify a multi-step customer journey on that business website.
 
@@ -60,6 +67,9 @@ For example:
 You can/should skip any steps that require actual payment or personal information, as this is a training workshop.
 
 ### Identify Multi-step Business Process with Microsoft CoPilot
+
+!!! tip "Example Business Process"
+    For this lab guide, we will reference Walmart's order fulfillment process.  Walmart is chosen due to their brand recognition, ecommerce platform, typical end-to-end business processes for their industry, and general fit for this exercise.  This lab, and the authors of this lab, have no affiliation to Walmart, their business, their observability strategy, or anything of the like.  All references to Walmart in this lab are from public facing non-confidential sources gathered through Microsoft CoPilot. 
 
 Use Microsoft CoPilot to identify the details of a multi-step business process.
 
@@ -88,4 +98,3 @@ In the next section, we'll explore the differences between a Customer Journey an
 <div class="grid cards" markdown>
 - [Continue to Customer Journeys vs Business Journeys:octicons-arrow-right-24:](3-customer-business-journey.md)
 </div>
-

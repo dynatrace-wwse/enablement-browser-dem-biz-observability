@@ -398,19 +398,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step" class="md-nav__link">
+  <a href="#customer-journey" class="md-nav__link">
     <span class="md-ellipsis">
-      Step
+      Customer Journey
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step">
+    <nav class="md-nav" aria-label="Customer Journey">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sub-step" class="md-nav__link">
+  <a href="#prepare-bizevents" class="md-nav__link">
     <span class="md-ellipsis">
-      Sub-Step
+      Prepare BizEvents
     </span>
   </a>
   
@@ -485,19 +485,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#step" class="md-nav__link">
+  <a href="#customer-journey" class="md-nav__link">
     <span class="md-ellipsis">
-      Step
+      Customer Journey
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step">
+    <nav class="md-nav" aria-label="Customer Journey">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sub-step" class="md-nav__link">
+  <a href="#prepare-bizevents" class="md-nav__link">
     <span class="md-ellipsis">
-      Sub-Step
+      Prepare BizEvents
     </span>
   </a>
   
@@ -542,16 +542,99 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<p>Synopsis</p>
+<p>Business events (BizEvents) are an important concept and central to Dynatrace Business Analytics. Business events generate business-grade data to enable important use cases.</p>
+<p>Business events are available for all Dynatrace RUM technologies (web RUM, mobile RUM, and OpenKit). RUM business events can be obtained by leveraging a dedicated method of the RUM JavaScript, OneAgent for mobile, or OpenKit.</p>
 <div class="grid cards">
 <ul>
-<li><a href="https://docs.dynatrace.com/docs/ingest-from/setup-on-k8s/deployment/k8s-log-monitoring" target="_blank">Learn More<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
+<li><a href="https://docs.dynatrace.com/docs/shortlink/ba-business-events-capturing#report-business-event-rum" target="_blank">Learn More<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
-<h2 id="step">Step<a class="headerlink" href="#step" title="Permanent link">#</a></h2>
-<p>TODO</p>
-<h3 id="sub-step">Sub-Step<a class="headerlink" href="#sub-step" title="Permanent link">#</a></h3>
-<p>TODO</p>
+<h2 id="customer-journey">Customer Journey<a class="headerlink" href="#customer-journey" title="Permanent link">#</a></h2>
+<p>Now that we understand the customer's digital experience, thanks to Real User Monitoring and Session Replay, now we want to understand the business outcomes of the customer journey.  We can accomplish this by sending BizEvents with the RUM JavaScript agent during the customer journey process.</p>
+<h3 id="prepare-bizevents">Prepare BizEvents<a class="headerlink" href="#prepare-bizevents" title="Permanent link">#</a></h3>
+<p>If you haven't already, download the <code>Customer_Journey</code> notebook.</p>
+<p><a href="../assets/dynatrace/notebook/Customer_Journey.json">Download Notebook</a></p>
+<p>In your Dynatrace tenant, open the <strong>Notebooks</strong> app.  Click <code>Upload</code> to upload the <code>Customer_Journey</code> notebook.</p>
+<p>Locate the <strong>Customer Journey</strong> markdown section.  Edit the markdown section and update the values with the details from your selected company's digital customer journey.</p>
+<p>Google Travel Track Flight example:</p>
+<ul>
+<li>Journey Name: <code>Track Flight</code></li>
+<li>Step 1: <code>Travel Homepage</code></li>
+<li>Step 2: <code>Flight Search</code></li>
+<li>Step 3: <code>Search Results</code></li>
+<li>Step 4: <code>Select Flight</code></li>
+<li>Step 5: <code>Track Flight</code></li>
+</ul>
+<p>Locate the <strong>BizEvent Template Example</strong> markdown section.  Here you will find the code snippet example for sending a BizEvent using the Dynatrace RUM JavaScript agent/sdk.  You'll adapt the <code>attributes</code> to that of your customer journey.</p>
+<p>Locate the <strong>Customer Journey BizEvents</strong> markdown section.  Below this section you'll find (10) sections; one markdown section with a code snippet and one DQL query for bizevents for each step of the customer journey.</p>
+<p>Modify each section and replace the placeholder names with the actual values for your customer journey.  It's recommended that you go through the customer journey as you are making these changes so that you can identify the actual page names and potential custom properties that are relevant for each step.  However, the custom properties are optional - but recommended to add more business value.</p>
+<p>Once you've modified the code snippet, start a new browser session and move through the customer journey.  Pause at each step of the journey and use the developer tools console to send a BizEvent with the correct payload.</p>
+<p><img alt="Send BizEvent" src="../img/rum-biz-obs_customer_journey_send_bizevent.gif" /></p>
+<p>After sending the BizEvent, wait a minute (usually sooner) and query the BizEvents in the notebook.</p>
+<p>Complete step 1, send a BizEvent, and query the results.</p>
+<p><img alt="Customer Journey BizEvent Step 1" src="../img/rum-biz-obs_customer_journey_bizevent_step_1.png" /></p>
+<p>Complete step 2, send a BizEvent, and query the results.</p>
+<p><img alt="Customer Journey BizEvent Step 2" src="../img/rum-biz-obs_customer_journey_bizevent_step_2.png" /></p>
+<p>Complete step 3, send a BizEvent, and query the results.</p>
+<p><img alt="Customer Journey BizEvent Step 3" src="../img/rum-biz-obs_customer_journey_bizevent_step_3.png" /></p>
+<p>Complete step 4, send a BizEvent, and query the results.</p>
+<p><img alt="Customer Journey BizEvent Step 4" src="../img/rum-biz-obs_customer_journey_bizevent_step_4.png" /></p>
+<p>Complete step 5, send a BizEvent, and query the results.</p>
+<p><img alt="Customer Journey BizEvent Step 5" src="../img/rum-biz-obs_customer_journey_bizevent_step_5.png" /></p>
+<p>Now that you have observability into the entire customer journey, use DQL and your creativity to analyze the business outcome of this journey.</p>
+<p>Google Travel Track Flight example:</p>
+<p>DQL:
+<div class="highlight"><pre><span></span><code>fetch bizevents
+| filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+| filter event.type == &quot;track-flight.travel-homepage&quot;
+| limit 1
+| join kind: inner, [
+    fetch bizevents
+    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+    | filter event.type == &quot;track-flight.travel-homepage&quot;
+  ], on: {dt.rum.session.id}, prefix: &quot;travel-homepage.&quot;
+| join kind: inner, [
+    fetch bizevents
+    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+    | filter event.type == &quot;track-flight.flight-search&quot;
+  ], on: {dt.rum.session.id}, prefix: &quot;flight-search.&quot;
+| join kind: inner, [
+    fetch bizevents
+    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+    | filter event.type == &quot;track-flight.search-results&quot;
+  ], on: {dt.rum.session.id}, prefix: &quot;search-results.&quot;
+| join kind: inner, [
+    fetch bizevents
+    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+    | filter event.type == &quot;track-flight.select-flight&quot;
+  ], on: {dt.rum.session.id}, prefix: &quot;select-flight.&quot;
+| join kind: inner, [
+    fetch bizevents
+    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
+    | filter event.type == &quot;track-flight.track-flight&quot;
+  ], on: {dt.rum.session.id}, prefix: &quot;track-flight.&quot;
+| fieldsAdd `decision-time-step-2` = if(isNotNull(`flight-search.timestamp`),(`flight-search.timestamp` - timestamp), else: null)
+| fieldsAdd `decision-time-step-3` = if(isNotNull(`search-results.timestamp`),(`search-results.timestamp`- `flight-search.timestamp`), else: null)
+| fieldsAdd `decision-time-step-4` = if(isNotNull(`select-flight.timestamp`),(`select-flight.timestamp` - `search-results.timestamp`), else: null)
+| fieldsAdd `decision-time-step-5` = if(isNotNull(`track-flight.timestamp`),(`track-flight.timestamp` - `select-flight.timestamp`), else: null)
+| fieldsAdd conversion = if(isNotNull(`track-flight.event.id`), true, else: false)
+| fields {journeyStartTime = timestamp, 
+          journeyId = dt.rum.session.id,
+          conversion,
+          userCountry = geo.country.name,
+          userRegion = geo.region.name,
+          userCity = geo.city.name,
+          decisionTimeStep2 = `decision-time-step-2`,
+          decisionTimeStep3 = `decision-time-step-3`,
+          decisionTimeStep4 = `decision-time-step-4`,
+          decisionTimeStep5 = `decision-time-step-5`,
+          departingAirport = `track-flight.departing`,
+          arrivingAirport = `track-flight.arriving`,
+          price = `track-flight.price`
+          }
+</code></pre></div></p>
+<p><img alt="Business Analytics" src="../img/rum-biz-obs_customer_journey_business_analytics.png" /></p>
+<p>Wow!  What a powerful query that let's us understand everything about the customer journey.  Business Observability and Analytics focuses on the business outcomes and business KPIs.  You don't need to use BizEvents to understand performance, availability, reliability, or correctness - that's what real user monitoring and session replay does for you natively!  This example is very powerful, but wouldn't it be nice if Dynatrace would provide this level of analysis automatically without having to write long DQL queries?  Great news, it can!  In the next section we'll explore Business Flows and Business Observability Automation.</p>
 <h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>
 <p>In the next section, we'll automate business observability with Workflows in Dynatrace.</p>
 <div class="grid cards">

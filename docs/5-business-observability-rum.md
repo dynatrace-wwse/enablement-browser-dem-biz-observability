@@ -11,7 +11,7 @@ Business events are available for all Dynatrace RUM technologies (web RUM, mobil
 
 ## Customer Journey
 
-TODO
+Now that we understand the customer's digital experience, thanks to Real User Monitoring and Session Replay, now we want to understand the business outcomes of the customer journey.  We can accomplish this by sending BizEvents with the RUM JavaScript agent during the customer journey process.
 
 ### Prepare BizEvents
 

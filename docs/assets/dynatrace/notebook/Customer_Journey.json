@@ -1,0 +1,720 @@
+{
+    "version": "6",
+    "defaultTimeframe": {
+        "from": "now()-2h",
+        "to": "now()"
+    },
+    "defaultSegments": [],
+    "sections": [
+        {
+            "id": "c0a6ca1e-f82e-4c3d-b7bf-ce1ccf9af64b",
+            "type": "markdown",
+            "markdown": "## Agentless Real User Monitoring\n\n### Company Name\n```\ncompany-name\n```\n\n### Website URL\n```\nhttp(s)://company-website-url.com/*\n```\n\n### RUM Application Name\n```\ncompany-name customer journey\n```\n\n### Code Snippet\n```\nPaste your JavaScript snippet here <script> ... </script>\n```\n\n### Source URL\n```\nPaste your script source url here\n```"
+        },
+        {
+            "id": "9a8fd723-e229-446f-8386-99da5dc3a0fd",
+            "type": "markdown",
+            "markdown": "## Customer Journey\n\n### Journey Name\n```\nYour customer journey name\n```\n\n### Step 1\n```\nstep-name\n```\n\n### Step 2\n```\nstep-name\n```\n\n### Step 3\n```\nstep-name\n```\n\n### Step 4\n```\nstep-name\n```\n\n### Step 5\n```\nstep-name\n```"
+        },
+        {
+            "id": "4efb8710-94a5-4566-b3de-1c4d20186752",
+            "type": "markdown",
+            "markdown": "### BizEvent Template Example\n```\nlet attributes = {\n    \"event.name\": \"Confirmed Booking\",\n    \"page\": \"booking-confirmation\",\n    \"product\": \"Danube Anna Hotel\",\n    \"amount\": 358.35,\n    \"currency\": \"USD\",\n    \"reviewScore\": 4.8,\n    \"arrivalDate\": \"2022-11-05\",\n    \"departureDate\": \"2022-11-15\",\n    \"journeyDuration\": 10,\n    \"adultTravelers\": 2,\n    \"childrenTravelers\": 0\n};\n\ndynatrace.sendBizEvent('com.easytravel.funnel.booking-finished', attributes);\n```\n\n### Workshop Template\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```\n\n### Google Travel Example\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"google-travel.track-flight.v001\",\n    \"event.category\": \"track-flight\",\n    \"event.name\": \"Travel Homepage\",\n    \"page\": \"Google Travel\",\n    \"popular-destination-1\": \"value\",\n    \"popular-destination-2\": \"value\",\n    \"popular-destination-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('track-flight.travel-homepage', attributes);\n```"
+        },
+        {
+            "id": "39c3f0c3-1322-4856-8aad-57557ebd2fe7",
+            "type": "markdown",
+            "markdown": "## Customer Journey BizEvents\nModify the markdown sections below to match your customer journey.  After triggering the BizEvent, modify the DQL section to match your customer journey step BizEvent details."
+        },
+        {
+            "id": "2f5e05ad-da43-4c4a-8c6a-41dfd119c5a5",
+            "type": "markdown",
+            "markdown": "### Step 1\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```"
+        },
+        {
+            "id": "c434760b-4ba2-4fb9-878f-68c9232d5510",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": "fetch bizevents\n| filter workshop == \"business-observability\"\n| filter event.provider == \"company-name.customer.journey\"\n| filter event.category == \"customer-journey-name\"\n| filter event.type == \"customer-journey-name.step-name\""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "c67c59aa-d04e-4ee4-8567-c9baee7f171a",
+            "type": "markdown",
+            "markdown": "### Step 2\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```"
+        },
+        {
+            "id": "a1a9c798-d662-496d-a875-20db6767aaf7",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": "fetch bizevents\n| filter workshop == \"business-observability\"\n| filter event.provider == \"company-name.customer.journey\"\n| filter event.category == \"customer-journey-name\"\n| filter event.type == \"customer-journey-name.step-name\""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "51ea7687-e7f1-4e54-aeb8-3c9771fbcd84",
+            "type": "markdown",
+            "markdown": "### Step 3\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```"
+        },
+        {
+            "id": "123a05a3-7271-4186-8d4f-3cd51468ced5",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": "fetch bizevents\n| filter workshop == \"business-observability\"\n| filter event.provider == \"company-name.customer.journey\"\n| filter event.category == \"customer-journey-name\"\n| filter event.type == \"customer-journey-name.step-name\""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "42171185-2a8b-487f-890e-81780be64470",
+            "type": "markdown",
+            "markdown": "### Step 4\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```"
+        },
+        {
+            "id": "f7399d4a-534e-4ba3-856f-9d43c71dc46c",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": "fetch bizevents\n| filter workshop == \"business-observability\"\n| filter event.provider == \"company-name.customer.journey\"\n| filter event.category == \"customer-journey-name\"\n| filter event.type == \"customer-journey-name.step-name\""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "dc0f5b95-5460-4375-85c0-ed5d0d5f8cc8",
+            "type": "markdown",
+            "markdown": "### Step 5\n```\nlet attributes = {\n    \"workshop\": \"business-observability\",\n    \"event.provider\": \"company-name.customer.journey\",\n    \"event.category\": \"customer-journey-name\",\n    \"event.name\": \"Step Name\",\n    \"page\": \"page-name\",\n    \"custom-property-name-1\": \"value\",\n    \"custom-propery-name-2\": \"value\",\n    \"custom-property-name-3\": \"value\"\n};\n\ndynatrace.sendBizEvent('customer-journey-name.step-name', attributes);\n```"
+        },
+        {
+            "id": "adf53689-a12b-4d0d-9dec-91e3e6264d20",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": "fetch bizevents\n| filter workshop == \"business-observability\"\n| filter event.provider == \"company-name.customer.journey\"\n| filter event.category == \"customer-journey-name\"\n| filter event.type == \"customer-journey-name.step-name\""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        },
+        {
+            "id": "6af25bbe-7bb3-4293-922b-69b859dabb6c",
+            "type": "markdown",
+            "markdown": "## Customer Journey: Business Analytics\nUse DQL to query the BizEvents from the customer journey and measure business outcomes!"
+        },
+        {
+            "id": "fa22a508-8822-40a0-82b1-19d835fdec6c",
+            "type": "dql",
+            "filterSegments": [],
+            "drilldownPath": [],
+            "previousFilterSegments": [],
+            "state": {
+                "input": {
+                    "timeframe": {
+                        "from": "now()-2h",
+                        "to": "now()"
+                    },
+                    "value": ""
+                },
+                "visualizationSettings": {
+                    "thresholds": [],
+                    "chartSettings": {
+                        "gapPolicy": "gap",
+                        "circleChartSettings": {
+                            "groupingThresholdType": "relative",
+                            "groupingThresholdValue": 0,
+                            "valueType": "relative"
+                        },
+                        "categoryOverrides": {},
+                        "curve": "linear",
+                        "pointsDisplay": "auto",
+                        "categoricalBarChartSettings": {
+                            "layout": "horizontal",
+                            "categoryAxisTickLayout": "horizontal",
+                            "scale": "absolute",
+                            "groupMode": "stacked",
+                            "colorPaletteMode": "multi-color",
+                            "valueAxisScale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "valueRepresentation": "absolute",
+                        "truncationMode": "middle"
+                    },
+                    "singleValue": {
+                        "showLabel": true,
+                        "label": "",
+                        "prefixIcon": "AnalyticsIcon",
+                        "isIconVisible": false,
+                        "alignment": "center",
+                        "colorThresholdTarget": "value"
+                    },
+                    "table": {
+                        "rowDensity": "condensed",
+                        "enableSparklines": false,
+                        "hiddenColumns": [],
+                        "linewrapEnabled": false,
+                        "lineWrapIds": [],
+                        "monospacedFontEnabled": false,
+                        "monospacedFontColumns": [],
+                        "firstVisibleRowIndex": 0,
+                        "columnWidths": {},
+                        "columnTypeOverrides": []
+                    },
+                    "honeycomb": {
+                        "shape": "hexagon",
+                        "legend": {
+                            "hidden": false,
+                            "position": "auto",
+                            "ratio": "auto"
+                        },
+                        "dataMappings": {},
+                        "displayedFields": [],
+                        "truncationMode": "middle",
+                        "labels": {
+                            "showLabels": false
+                        },
+                        "colorMode": "color-palette",
+                        "colorPalette": "categorical"
+                    },
+                    "histogram": {
+                        "legend": {
+                            "position": "auto"
+                        },
+                        "yAxis": {
+                            "label": "Frequency",
+                            "isLabelVisible": true,
+                            "scale": "linear"
+                        },
+                        "colorPalette": "categorical",
+                        "dataMappings": [],
+                        "variant": "single",
+                        "truncationMode": "middle"
+                    },
+                    "valueBoundaries": {
+                        "min": "auto",
+                        "max": "auto"
+                    },
+                    "autoSelectVisualization": true
+                },
+                "querySettings": {
+                    "maxResultRecords": 1000,
+                    "defaultScanLimitGbytes": 500,
+                    "maxResultMegaBytes": 1,
+                    "defaultSamplingRatio": 10,
+                    "enableSampling": false
+                },
+                "state": "idle",
+                "davis": {
+                    "includeLogs": true,
+                    "davisVisualization": {
+                        "isAvailable": true
+                    }
+                }
+            }
+        }
+    ]
+}

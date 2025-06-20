@@ -9,7 +9,7 @@ Dynatrace Real User Monitoring (RUM) gives you the power to know your customers 
 
 ## Configure Real User Monitoring
 
-[Download Notebook](./assets/dynatrace/notebook/Customer_Journey.json)
+[Download Notebook](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Customer_Journey.json){target=_blank}
 
 In your Dynatrace tenant, open the **Notebooks** app.  Click `Upload` to upload the `Customer_Journey` notebook.
 

@@ -385,4 +385,17 @@ Here is the completed example, for Walmart's Online Order Fulfillment business p
 
 ## Conclusion
 
-<!-- TODO: Summarize and Conclude -->
+By observing end-to-end business processes and connecting them to the underlying digital applications and infrastructure, you’ve unlocked a powerful perspective:
+
+👉 You’re no longer just seeing what’s happening — you understand why it’s happening and how to improve it.
+
+This visibility is your competitive edge. It empowers you to:
+
+* Spot friction points before they impact revenue
+* Align teams and tools for faster, smarter execution
+* Drive value from your tech stack instead of just maintaining it
+* Turn operational insight into business momentum
+
+In short, you’ve learned how to turn process visibility into business velocity.
+
+Now, take what you’ve learned and apply it in practice, to fully solve the use case.

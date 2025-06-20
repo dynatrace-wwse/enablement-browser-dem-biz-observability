@@ -2,12 +2,8 @@
 
 --8<-- "snippets/disclaimer.md"
 
-<!--TODO: Before going live, remove the under-construction snippet-->
---8<-- "snippets/under-construction.md"
-
 ## Lab Overview
 
-<!--TODO: Update lab overview -->
 During this hands-on training lab, we’ll explore the Digital Experience Management (DEM) and Business Observability capabilities of the Dynatrace platform. Participants will gain practical experience by instrumenting Real User Monitoring (RUM) and Business Analytics directly from their local browser using a Chrome extension.
 
 The lab begins with a focus on the customer journey—tracking real-time user interactions on a digital website to understand performance, usability, and experience metrics. Then, we’ll shift to the business journey, automating observability across the full lifecycle of a business process using Workflow Automations, BizEvents, and Business Flows.
@@ -20,7 +16,6 @@ By the end of the session, participants will understand how to:
 - Build automated workflows to monitor business-critical processes
 - Visualize and troubleshoot business flows to ensure continuity and performance
 
-<!--TODO: Before going live, finalize lab tasks-->
 **Lab tasks:**
 
 1. Customer Journey vs Business Journey
@@ -40,13 +35,11 @@ By the end of the session, participants will understand how to:
 
 ## Technical Specification
 
-<!--TODO: Before going live, update technologies used in the lab-->
 ### Technologies Used
 - [Dynatrace](https://www.dynatrace.com/trial)
-- Technology with Link
-    - Version Tested
+- [Google Chrome](https://www.google.com/chrome/)
+    - Tested on version 137
 
-<!--TODO: Before going live, update reference architecture in the lab-->
 ### Reference Architecture
 
 N/A

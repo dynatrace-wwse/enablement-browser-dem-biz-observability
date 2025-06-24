@@ -121,12 +121,12 @@ Now that you've validated that real user monitoring is working, navigate from th
 
 Tag User:
 ```javascript
-dtrum.endSession()
+dtrum.identifyUser('user-name')
 ```
 
 End Session:
 ```javascript
-dtrum.identifyUser('user-name')
+dtrum.endSession()
 ```
 
 ![Complete Customer Journey](./img/real-user_configure_extension_complete_customer_journey.gif)

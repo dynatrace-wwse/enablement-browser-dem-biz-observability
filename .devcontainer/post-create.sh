@@ -1,7 +1,7 @@
 #!/bin/bash
-
 #loading functions to script
 source /workspaces/$RepositoryName/.devcontainer/util/functions.sh
+export SECONDS=0
 
 bindFunctionsInShell
 
@@ -61,10 +61,10 @@ if [[ "$CODESPACE_NAME" == dttest-* ]]; then
     gh codespace delete --codespace "$CODESPACE_NAME" --force
 else
 
-    # Your content here
-    printInfo "Sending BizEvent to track usage of $RepositoryName"
-    #TODO: BeforeGoLive: Uncomment, this will post a BizEvent to keep track of instantiations
-    #postCodespaceTracker $RepositoryName
+    verifyCodespaceCreation
     
+    postCodespaceTracker
+  
     printInfo "Finished creating devcontainer"
+
 fi

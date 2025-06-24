@@ -697,10 +697,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 <p>Now that you've validated that real user monitoring is working, navigate from the start of the customer journey to the end.  Be sure to keep Developer Tools open the entire time so that the local overrides take effect.  When you start the journey, tag your user session with your user identifier.  When you end your journey, manually end the journey with the console command.</p>
 <p>Tag User:
-<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">endSession</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">&#39;user-name&#39;</span><span class="p">)</span>
 </code></pre></div></p>
 <p>End Session:
-<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">&#39;user-name&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">endSession</span><span class="p">()</span>
 </code></pre></div></p>
 <p><img alt="Complete Customer Journey" src="../img/real-user_configure_extension_complete_customer_journey.gif" /></p>
 <div class="admonition tip">

@@ -370,6 +370,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-workflow-authorization-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Workflow authorization settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#identify-public-facing-business-website" class="md-nav__link">
     <span class="md-ellipsis">
       Identify Public-facing Business Website
@@ -551,6 +560,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-workflow-authorization-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure Workflow authorization settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#identify-public-facing-business-website" class="md-nav__link">
     <span class="md-ellipsis">
       Identify Public-facing Business Website
@@ -623,6 +641,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Install RUM Injection Extension for Chrome</li>
 <li>Install Dynatrace Session Replay Extension for Chrome</li>
 <li>Install Business Flow app</li>
+<li>Configure Workflow authorization settings</li>
 <li>Identify public-facing business website<ul>
 <li>Identify multi-page customer journey</li>
 </ul>
@@ -647,6 +666,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <h3 id="install-business-flow-app">Install Business Flow app<a class="headerlink" href="#install-business-flow-app" title="Permanent link">#</a></h3>
 <p>In your Dynatrace tenant, launc the <strong>Hub</strong> app.  Locate and install the <strong>Business Flow</strong> app.</p>
 <p><img alt="Business Flow app" src="../img/prereq-install_business_flow_app.png" /></p>
+<h3 id="configure-workflow-authorization-settings">Configure Workflow authorization settings<a class="headerlink" href="#configure-workflow-authorization-settings" title="Permanent link">#</a></h3>
+<p>In your Dynatrace tenant, launch the <strong>Workflows</strong> app.  In the top right corner, click on the gear icon and choose <code>Authorization Settings</code>.</p>
+<p><img alt="Workflows Authorization" src="../img/prereq-workflow_authorization_settings.png" /></p>
+<p>Enable all of the <strong>Primary permissions</strong>.  In the secondary permissions, check the box to <code>Select all</code> permissions.  Click on <code>Save</code>.</p>
+<p><img alt="Workflows Permissions" src="../img/prereq-workflow_authorization_set_permissions.png" /></p>
+<p>You will likely encounter a warning that you are missing permissions that you have granted to Workflows, ignore this, and click <code>Close</code>.</p>
+<p><img alt="Workflows Ignore Warning" src="../img/prereq-workflow_authorization_ignore_warning.png" /></p>
 <h3 id="identify-public-facing-business-website">Identify Public-facing Business Website<a class="headerlink" href="#identify-public-facing-business-website" title="Permanent link">#</a></h3>
 <div class="admonition tip">
 <p class="admonition-title">Example Business Website</p>

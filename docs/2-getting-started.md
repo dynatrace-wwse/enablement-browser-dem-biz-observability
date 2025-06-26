@@ -8,6 +8,7 @@ You will need full administrator access to a Dynatrace SaaS tenant with a DPS li
 * Install RUM Injection Extension for Chrome
 * Install Dynatrace Session Replay Extension for Chrome
 * Install Business Flow app
+* Configure Workflow authorization settings
 * Identify public-facing business website
     - Identify multi-page customer journey
 * Identify multi-step business process with Microsoft CoPilot
@@ -47,6 +48,20 @@ Install the extension.
 In your Dynatrace tenant, launc the **Hub** app.  Locate and install the **Business Flow** app.
 
 ![Business Flow app](./img/prereq-install_business_flow_app.png)
+
+### Configure Workflow authorization settings
+
+In your Dynatrace tenant, launch the **Workflows** app.  In the top right corner, click on the gear icon and choose `Authorization Settings`.
+
+![Workflows Authorization](./img/prereq-workflow_authorization_settings.png)
+
+Enable all of the **Primary permissions**.  In the secondary permissions, check the box to `Select all` permissions.  Click on `Save`.
+
+![Workflows Permissions](./img/prereq-workflow_authorization_set_permissions.png)
+
+You will likely encounter a warning that you are missing permissions that you have granted to Workflows, ignore this, and click `Close`.
+
+![Workflows Ignore Warning](./img/prereq-workflow_authorization_ignore_warning.png)
 
 ### Identify Public-facing Business Website
 

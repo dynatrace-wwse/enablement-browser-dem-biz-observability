@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Now that we understand the customer's digital experience, thanks to Real User Monitoring and Session Replay, now we want to understand the business outcomes of the customer journey.  We can accomplish this by sending BizEvents with the RUM JavaScript agent during the customer journey process.</p>
 <h3 id="prepare-bizevents">Prepare BizEvents<a class="headerlink" href="#prepare-bizevents" title="Permanent link">#</a></h3>
 <p>If you haven't already, download the <code>Customer_Journey</code> notebook.</p>
-<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Workshop_Customer_Journey.json" target="_blank">Download Workshop Notebook</a></p>
+<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Customer_Journey.json" target="_blank">Download Workshop Notebook</a></p>
 <p>In your Dynatrace tenant, open the <strong>Notebooks</strong> app.  Click <code>Upload</code> to upload the <code>Customer_Journey</code> notebook.</p>
 <p>Locate the <strong>Customer Journey</strong> markdown section.  This markdown section includes the steps for purchasing products on the DEM Strike &amp; Save webaite. We've already filled out the details for you, but you when you want to build this for your prospect or customer, you can use the following blank template to enter the customer journey steps. </p>
 <p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Blank_Customer_Journey.json" target="_blank">Notebook for Tailored Demos</a></p>
@@ -569,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Locate the <strong>Customer Journey BizEvents</strong> markdown section.  Below this section you'll find (10) sections; one markdown section with a code snippet and one DQL query for bizevents for each step of the customer journey. We've done the hard work for you and pre-populated all of the biz event steps and DQL queries for the DEM Strike Purchase Journey.</p>
 <p>On another browser tab, navigate through a customer journey on the DEM Strike website and update the notebook with the attributes for each step to match your journey (page name, products, amounts, etc.) This helps us bring the demo to life and provide business context to the events.</p>
 <p>Once you've modified the code snippets, start a new browser session and move through the customer journey.  Pause at each step of the journey and use the developer tools console to send a BizEvent with the correct payload.</p>
-<p><img alt="Send BizEvent" src="../img/rum-biz-obs_customer_journey_send_bizevent.gif" /></p>
+<p><img alt="Send BizEvent" src="../img/rum-biz-obs_customer_journey_send_bizevent.png" /></p>
 <p>After sending the BizEvent, wait a minute (usually sooner) and query the BizEvents in the notebook.</p>
 <p>Complete step 1, send a BizEvent, and query the results.</p>
 <p><img alt="Customer Journey BizEvent Step 1" src="../img/rum-biz-obs_customer_journey_bizevent_step_1.png" /></p>
@@ -582,56 +582,53 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Complete step 5, send a BizEvent, and query the results.</p>
 <p><img alt="Customer Journey BizEvent Step 5" src="../img/rum-biz-obs_customer_journey_bizevent_step_5.png" /></p>
 <p>Now that you have observability into the entire customer journey, use DQL and your creativity to analyze the business outcome of this journey.</p>
-<p>Google Travel Track Flight example:</p>
+<p>DEM Strike Outcome:</p>
 <p>DQL:
 <div class="highlight"><pre><span></span><code>fetch bizevents
-| filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-| filter event.type == &quot;track-flight.travel-homepage&quot;
+| filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+| filter event.name == &quot;view-product-page&quot;
 | limit 1
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.travel-homepage&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;travel-homepage.&quot;
+    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+    | filter event.name == &quot;add-to-cart&quot;
+], on: {user.unique.id}, prefix: &quot;add-to-cart.&quot;
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.flight-search&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;flight-search.&quot;
+    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+    | filter event.name == &quot;cart-page-view&quot;
+], on: {user.unique.id}, prefix: &quot;cart-page.&quot;
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.search-results&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;search-results.&quot;
+    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+    | filter event.name == &quot;checkout-page-view&quot;
+], on: {user.unique.id}, prefix: &quot;checkout-page.&quot;
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.select-flight&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;select-flight.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.track-flight&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;track-flight.&quot;
-| fieldsAdd `decision-time-step-2` = if(isNotNull(`flight-search.timestamp`),(`flight-search.timestamp` - timestamp), else: null)
-| fieldsAdd `decision-time-step-3` = if(isNotNull(`search-results.timestamp`),(`search-results.timestamp`- `flight-search.timestamp`), else: null)
-| fieldsAdd `decision-time-step-4` = if(isNotNull(`select-flight.timestamp`),(`select-flight.timestamp` - `search-results.timestamp`), else: null)
-| fieldsAdd `decision-time-step-5` = if(isNotNull(`track-flight.timestamp`),(`track-flight.timestamp` - `select-flight.timestamp`), else: null)
-| fieldsAdd conversion = if(isNotNull(`track-flight.event.id`), true, else: false)
-| fields {journeyStartTime = timestamp, 
-          journeyId = dt.rum.session.id,
-          conversion,
-          userCountry = geo.country.name,
-          userRegion = geo.region.name,
-          userCity = geo.city.name,
-          decisionTimeStep2 = `decision-time-step-2`,
-          decisionTimeStep3 = `decision-time-step-3`,
-          decisionTimeStep4 = `decision-time-step-4`,
-          decisionTimeStep5 = `decision-time-step-5`,
-          departingAirport = `track-flight.departing`,
-          arrivingAirport = `track-flight.arriving`,
-          price = `track-flight.price`
-          }
+    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+    | filter event.name == &quot;order-received&quot;
+], on: {user.unique.id}, prefix: &quot;order-received.&quot;
+| fieldsAdd `decision-time-step-2` = if(isNotNull(`add-to-cart.timestamp`),(`add-to-cart.timestamp` - timestamp), else: null)
+| fieldsAdd `decision-time-step-3` = if(isNotNull(`cart-page.timestamp`),(`cart-page.timestamp` - `add-to-cart.timestamp`), else: null)
+| fieldsAdd `decision-time-step-4` = if(isNotNull(`checkout-page.timestamp`),(`checkout-page.timestamp` - `cart-page.timestamp`), else: null)
+| fieldsAdd `decision-time-step-5` = if(isNotNull(`order-received.timestamp`),(`order-received.timestamp` - `checkout-page.timestamp`), else: null)
+| fieldsAdd conversion = if(isNotNull(`order-received.order.id`), true, else: false)
+| fields {
+    journeyStartTime = timestamp,
+    journeyId = user.unique.id,
+    conversion,
+    customerStatus = customer.status,
+    loyaltyLevel = customer.loyalty.level,
+    decisionTimeStep2 = `decision-time-step-2`,
+    decisionTimeStep3 = `decision-time-step-3`,
+    decisionTimeStep4 = `decision-time-step-4`,
+    decisionTimeStep5 = `decision-time-step-5`,
+    productName = product.name,
+    productCategory = product.category,
+    productPrice = product.price,
+    orderTotal = `order-received.order.total.value`
+
+}
 </code></pre></div></p>
 <p><img alt="Business Analytics" src="../img/rum-biz-obs_customer_journey_business_analytics.png" /></p>
 <p>Wow!  What a powerful query that let's us understand everything about the customer journey.  Business Observability focuses on the business outcomes and business KPIs needed to make data-driven decisions and when used in collaboration with DEM, ties customer experience to business outcomes.</p>

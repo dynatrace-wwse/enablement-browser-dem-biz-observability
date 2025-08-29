@@ -789,7 +789,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>In order to demonstrate end-to-end business process observability in this lab, we'll utilize a <a href="https://docs.dynatrace.com/docs/analyze-explore-automate/workflows/manage-workflows/workflows-upload" target="_blank">Dynatrace Workflow</a> combined with Microsoft CoPilot.</p>
 <h3 id="download-workflow-assets">Download Workflow Assets<a class="headerlink" href="#download-workflow-assets" title="Permanent link">#</a></h3>
 <p>Download the Workflow template and configuration code snippet.</p>
-<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/wf_business_data_generator_3008.json" target="_blank">Workflow Template</a></p>
+<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/wftpl_business_data_generator.yaml" target="_blank">Workflow Template</a></p>
 <p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/config.js" target="_blank">Configuration Code Snippet</a></p>
 <h3 id="update-code-snippet">Update Code Snippet<a class="headerlink" href="#update-code-snippet" title="Permanent link">#</a></h3>
 <p>Use Microsoft CoPilot to update the configuration code snippet.</p>
@@ -826,7 +826,7 @@ If there are more than 5 steps, simplify to the 5 most business-critical steps.
 <p><img alt="CoPilot Code Snippet Download" src="../img/biz-obs-auto_copilot_code_snippet_download.png" /></p>
 <p>Download and save the modified code snippet.</p>
 <h3 id="upload-and-modify-workflow">Upload and Modify Workflow<a class="headerlink" href="#upload-and-modify-workflow" title="Permanent link">#</a></h3>
-<p>In your Dynatrace tenant, launch the <strong>Workflows</strong> app.  From the <code>All workflows</code> tab, click on <code>Upload</code> and provide the Workflow template file that you downloaded (<code>wf_business_data_generator_3008.json</code>).</p>
+<p>In your Dynatrace tenant, launch the <strong>Workflows</strong> app.  From the <code>All workflows</code> tab, click on <code>Upload</code> and provide the Workflow template file that you downloaded (<code>wftpl_business_data_generator.yaml</code>).</p>
 <p><img alt="Workflow Upload" src="../img/biz-obs-auto_workflows_upload_workflow.png" /></p>
 <p>The Workflow will be created from the template and you'll be editing a draft.  Click on the <strong>config</strong> task and click on <code>Input</code> to see the source code of this task.  This is the code snippet that we need to replace with the modified code snippet that CoPilot gave us.</p>
 <p><img alt="Workflow Config Start" src="../img/biz-obs-auto_workflows_config_input_start.png" /></p>

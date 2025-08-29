@@ -15,7 +15,7 @@ In order to demonstrate end-to-end business process observability in this lab, w
 
 Download the Workflow template and configuration code snippet.
 
-[Workflow Template](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/wf_business_data_generator_3008.json){target=_blank}
+[Workflow Template](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/wftpl_business_data_generator.yaml){target=_blank}
 
 [Configuration Code Snippet](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/workflow/config.js){target=_blank}
 
@@ -72,7 +72,7 @@ Download and save the modified code snippet.
 
 ### Upload and Modify Workflow
 
-In your Dynatrace tenant, launch the **Workflows** app.  From the `All workflows` tab, click on `Upload` and provide the Workflow template file that you downloaded (`wf_business_data_generator_3008.json`).
+In your Dynatrace tenant, launch the **Workflows** app.  From the `All workflows` tab, click on `Upload` and provide the Workflow template file that you downloaded (`wftpl_business_data_generator.yaml`).
 
 ![Workflow Upload](./img/biz-obs-auto_workflows_upload_workflow.png)
 

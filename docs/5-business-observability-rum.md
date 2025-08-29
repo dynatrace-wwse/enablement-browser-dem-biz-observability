@@ -17,7 +17,7 @@ Now that we understand the customer's digital experience, thanks to Real User Mo
 
 If you haven't already, download the `Customer_Journey` notebook.
 
-[Download Workshop Notebook](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Workshop_Customer_Journey.json){target=_blank}
+[Download Workshop Notebook](https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Customer_Journey.json){target=_blank}
 
 In your Dynatrace tenant, open the **Notebooks** app.  Click `Upload` to upload the `Customer_Journey` notebook.
 
@@ -42,7 +42,7 @@ On another browser tab, navigate through a customer journey on the DEM Strike we
 
 Once you've modified the code snippets, start a new browser session and move through the customer journey.  Pause at each step of the journey and use the developer tools console to send a BizEvent with the correct payload.
 
-![Send BizEvent](./img/rum-biz-obs_customer_journey_send_bizevent.gif)
+![Send BizEvent](./img/rum-biz-obs_customer_journey_send_bizevent.png)
 
 After sending the BizEvent, wait a minute (usually sooner) and query the BizEvents in the notebook.
 
@@ -68,58 +68,55 @@ Complete step 5, send a BizEvent, and query the results.
 
 Now that you have observability into the entire customer journey, use DQL and your creativity to analyze the business outcome of this journey.
 
-Google Travel Track Flight example:
+DEM Strike Outcome:
 
 DQL:
 ```
 fetch bizevents
-| filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-| filter event.type == "track-flight.travel-homepage"
+| filter event.provider == "dem-strike-web" and event.category == "strike-purchase-journey"
+| filter event.name == "view-product-page"
 | limit 1
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-    | filter event.type == "track-flight.travel-homepage"
-  ], on: {dt.rum.session.id}, prefix: "travel-homepage."
+    | filter event.provider == "dem-strike-web" and event.category == "strike-purchase-journey"
+    | filter event.name == "add-to-cart"
+], on: {user.unique.id}, prefix: "add-to-cart."
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-    | filter event.type == "track-flight.flight-search"
-  ], on: {dt.rum.session.id}, prefix: "flight-search."
+    | filter event.provider == "dem-strike-web" and event.category == "strike-purchase-journey"
+    | filter event.name == "cart-page-view"
+], on: {user.unique.id}, prefix: "cart-page."
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-    | filter event.type == "track-flight.search-results"
-  ], on: {dt.rum.session.id}, prefix: "search-results."
+    | filter event.provider == "dem-strike-web" and event.category == "strike-purchase-journey"
+    | filter event.name == "checkout-page-view"
+], on: {user.unique.id}, prefix: "checkout-page."
 | join kind: inner, [
     fetch bizevents
-    | filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-    | filter event.type == "track-flight.select-flight"
-  ], on: {dt.rum.session.id}, prefix: "select-flight."
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == "business-observability" and event.provider == "google-travel.track-flight.v002" and event.category == "track-flight"
-    | filter event.type == "track-flight.track-flight"
-  ], on: {dt.rum.session.id}, prefix: "track-flight."
-| fieldsAdd `decision-time-step-2` = if(isNotNull(`flight-search.timestamp`),(`flight-search.timestamp` - timestamp), else: null)
-| fieldsAdd `decision-time-step-3` = if(isNotNull(`search-results.timestamp`),(`search-results.timestamp`- `flight-search.timestamp`), else: null)
-| fieldsAdd `decision-time-step-4` = if(isNotNull(`select-flight.timestamp`),(`select-flight.timestamp` - `search-results.timestamp`), else: null)
-| fieldsAdd `decision-time-step-5` = if(isNotNull(`track-flight.timestamp`),(`track-flight.timestamp` - `select-flight.timestamp`), else: null)
-| fieldsAdd conversion = if(isNotNull(`track-flight.event.id`), true, else: false)
-| fields {journeyStartTime = timestamp, 
-          journeyId = dt.rum.session.id,
-          conversion,
-          userCountry = geo.country.name,
-          userRegion = geo.region.name,
-          userCity = geo.city.name,
-          decisionTimeStep2 = `decision-time-step-2`,
-          decisionTimeStep3 = `decision-time-step-3`,
-          decisionTimeStep4 = `decision-time-step-4`,
-          decisionTimeStep5 = `decision-time-step-5`,
-          departingAirport = `track-flight.departing`,
-          arrivingAirport = `track-flight.arriving`,
-          price = `track-flight.price`
-          }
+    | filter event.provider == "dem-strike-web" and event.category == "strike-purchase-journey"
+    | filter event.name == "order-received"
+], on: {user.unique.id}, prefix: "order-received."
+| fieldsAdd `decision-time-step-2` = if(isNotNull(`add-to-cart.timestamp`),(`add-to-cart.timestamp` - timestamp), else: null)
+| fieldsAdd `decision-time-step-3` = if(isNotNull(`cart-page.timestamp`),(`cart-page.timestamp` - `add-to-cart.timestamp`), else: null)
+| fieldsAdd `decision-time-step-4` = if(isNotNull(`checkout-page.timestamp`),(`checkout-page.timestamp` - `cart-page.timestamp`), else: null)
+| fieldsAdd `decision-time-step-5` = if(isNotNull(`order-received.timestamp`),(`order-received.timestamp` - `checkout-page.timestamp`), else: null)
+| fieldsAdd conversion = if(isNotNull(`order-received.order.id`), true, else: false)
+| fields {
+    journeyStartTime = timestamp,
+    journeyId = user.unique.id,
+    conversion,
+    customerStatus = customer.status,
+    loyaltyLevel = customer.loyalty.level,
+    decisionTimeStep2 = `decision-time-step-2`,
+    decisionTimeStep3 = `decision-time-step-3`,
+    decisionTimeStep4 = `decision-time-step-4`,
+    decisionTimeStep5 = `decision-time-step-5`,
+    productName = product.name,
+    productCategory = product.category,
+    productPrice = product.price,
+    orderTotal = `order-received.order.total.value`
+    
+}
 ```
 
 ![Business Analytics](./img/rum-biz-obs_customer_journey_business_analytics.png)

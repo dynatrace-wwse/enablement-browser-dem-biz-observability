@@ -404,15 +404,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#configure-csp-overrides" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure CSP Overrides
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -553,15 +544,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#configure-csp-overrides" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configure CSP Overrides
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -626,16 +608,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <p>Dynatrace Real User Monitoring (RUM) gives you the power to know your customers by providing performance analysis in real time. This includes all user actions taken and how the various actions impact performance. You can also easily identify problems or errors that occurred as well as user experience ratings, geolocation breakdowns, and much more. You can also gain insight into the behavior of your users. This among others includes the number of customers who return to your site. With Dynatrace RUM, you have the context over time and immediate analysis to the complete picture of your end-user experience.</p>
+<p>In this workshop, we'll be using the following DEM Strike &amp; Save Ecom Website to streamline some of the steps: https://www.demstrike-playground.com/</p>
+<p>We've also provided blank templates so you can use the same methodology to build a tailored demo with your customer or prospect's website and customer journey. </p>
 <div class="grid cards">
 <ul>
 <li><a href="https://docs.dynatrace.com/docs/observe/digital-experience/rum-concepts/rum-overview#real-user-monitoring" target="_blank">Learn More<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
 </ul>
 </div>
 <h2 id="configure-real-user-monitoring">Configure Real User Monitoring<a class="headerlink" href="#configure-real-user-monitoring" title="Permanent link">#</a></h2>
-<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Customer_Journey.json" target="_blank">Download Notebook</a></p>
-<p>In your Dynatrace tenant, open the <strong>Notebooks</strong> app.  Click <code>Upload</code> to upload the <code>Customer_Journey</code> notebook.</p>
-<p>Begin by modifying the first markdown section with the details about your company, <code>Company Name</code> and <code>Website URL</code>.  At the end of the URL, add a <code>*</code> so that it ends with <code>/*</code>.</p>
-<p><img alt="Company Details" src="../img/real-user_company_details.png" /></p>
+<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Workshop_Customer_Journey.json" target="_blank">Download Workshop Notebook</a></p>
+<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Blank_Customer_Journey.json" target="_blank">Notebook for Tailored Demos</a></p>
 <h3 id="create-agentless-rum-application">Create Agentless RUM Application<a class="headerlink" href="#create-agentless-rum-application" title="Permanent link">#</a></h3>
 <p>In your Dynatrace tenant, open the search menu and search for <strong>Web application monitoring via manual insertion</strong>.</p>
 <div class="highlight"><pre><span></span><code>Web application monitoring via manual insertion
@@ -671,23 +653,15 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>In the <strong>Target URL Pattern</strong>, copy and paste the URL from your notebook for the company website.</p>
 <p>In the <strong>RUM JS Tag URL</strong>, copy and paste the source URL from your notebook for the RUM JavaScript tag location.</p>
 <p><img alt="Set URL Pattern and Script Source" src="../img/real-user_configure_extension_set_url_source.png" /></p>
-<p><strong>Content Security Policy CSP</strong></p>
-<p>You will almost certainly encounter sites that restrict remote content loading and requests using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP" target="_blank">Content Security Policy (CSP)</a>. </p>
-<p>Content Security Policy (CSP) is a feature that helps to prevent or minimize the risk of certain types of security threats. It consists of a series of instructions from a website to a browser, which instruct the browser to place restrictions on the things that the code comprising the site is allowed to do.</p>
-<p>The primary use case for CSP is to control which resources, in particular JavaScript resources, a document is allowed to load. This is mainly used as a defense against <a href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting" target="_blank">cross-site scripting (XSS)</a> attacks, in which an attacker is able to inject malicious code into the victim's site.</p>
-<p>Since we are injecting our RUM locally via an extension, you will see these warnings in your Chrome Developer Tools Console.</p>
-<h3 id="configure-csp-overrides">Configure CSP Overrides<a class="headerlink" href="#configure-csp-overrides" title="Permanent link">#</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Overrides Active with Developer Tools Only</p>
-<p>Enabling these local overrides only function while the Chrome Developer Tools are open.  Be sure to leave them open for the entire time that you're doing this exercise and browsing the website.</p>
-</div>
-<p>Navigate to the website (you should be there already).</p>
-<p>Open the Developer Tools <code>View &gt; Developer &gt; Developer Tools</code>. Switch to the <code>Sources</code> tab, then <code>Overrides</code> sub-tab.</p>
-<p>Click <code>Select folder for overrides</code>.  Navigate to the <code>overrides</code> directory <strong>in your unzipped extension folder</strong> and press <code>Select</code>.</p>
-<p>If prompted to allow local edit, click <code>Edit</code>.</p>
-<p><img alt="Add Local Overrides" src="../img/real-user_configure_extension_add_local_overrides.gif" /></p>
-<p>Click and hold the refresh button and select <code>Empty cache and hard reload</code>.  As the page loads, navigate to the <code>Network</code> tab of Developer Tools and locate the Dynatrace RUM beacons.  You can filter on <code>Fetch/XHR</code> request types and the pattern <code>bf?</code>.  Validate that you're seeing HTTP status <strong>200</strong>.</p>
 <p><img alt="Locate RUM Beacon" src="../img/real-user_configure_extension_hard_refresh_find_beacon.gif" /></p>
+<p>Now click around on the site and check in Dynatrace to validate data is coming in. Once validated, navigate from the start of the customer journey to the end. When you start the journey, tag your user session with your user identifier.  When you end your journey, manually end the journey with the console command.</p>
+<p>Tag User:
+<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">&#39;user-name&#39;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Normally, user sessions end on one of the ways <a href="https://docs.dynatrace.com/docs/shortlink/user-session#user-session-end" target="_blank">documented here</a>.  However, we want to be able to create a bunch of sessions quickly without having to close the browser or wait for inactivity. To do this, navigate to the console in Chrome Developer Tools and type <code>dtrum.endSession()</code> and hit enter to end the session manually.</p>
+<p>End Session:
+<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">endSession</span><span class="p">()</span>
+</code></pre></div></p>
 <div class="admonition tip">
 <p class="admonition-title">Troubleshooting</p>
 <p>If you're not seeing beacons with HTTP status 200, try opening the website in a new tab or window and validate the following:
@@ -695,18 +669,7 @@ document.addEventListener('DOMContentLoaded', function() {
 2. There aren't any CSP errors in the <code>Console</code>
 3. The URL pattern and source URL are correct in the extension configuration</p>
 </div>
-<p>Now that you've validated that real user monitoring is working, navigate from the start of the customer journey to the end.  Be sure to keep Developer Tools open the entire time so that the local overrides take effect.  When you start the journey, tag your user session with your user identifier.  When you end your journey, manually end the journey with the console command.</p>
-<p>Tag User:
-<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">&#39;user-name&#39;</span><span class="p">)</span>
-</code></pre></div></p>
-<p>End Session:
-<div class="highlight"><pre><span></span><code><span class="nx">dtrum</span><span class="p">.</span><span class="nx">endSession</span><span class="p">()</span>
-</code></pre></div></p>
 <p><img alt="Complete Customer Journey" src="../img/real-user_configure_extension_complete_customer_journey.gif" /></p>
-<div class="admonition tip">
-<p class="admonition-title">Ending Sessions</p>
-<p>Normally, user sessions end on one of the ways <a href="https://docs.dynatrace.com/docs/shortlink/user-session#user-session-end" target="_blank">documented here</a>.  However, we want to be able to create a bunch of sessions quickly without having to close the browser or wait for inactivity. To do this, navigate to the console in Chrome Developer Tools and type <code>dtrum.endSession()</code> and hit enter to end the session manually.</p>
-</div>
 <h2 id="session-replay">Session Replay<a class="headerlink" href="#session-replay" title="Permanent link">#</a></h2>
 <p>Session Replay is a powerful tool that can modernize your Digital Experience Monitoring (DEM) strategy. You can use it to capture and visually replay the complete digital experience of every user.</p>
 <p>You can record your customers' interactions with your application and replay each click or tap in a movie-like experience. Session Replay also makes it easy for your QA teams to reproduce production issues, which your developers can use to bridge the gap between code and user experience.</p>

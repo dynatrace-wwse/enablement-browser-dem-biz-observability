@@ -9,10 +9,6 @@
       
       
       
-        <link rel="prev" href="../4-real-user-monitoring/">
-      
-      
-        <link rel="next" href="../6-business-observability-automation/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +16,7 @@
     
     
       
-        <title>5. Business Observability with RUM - Dynatrace Enablement Lab: Business Observability</title>
+        <title>7 backup for csp overrides - Dynatrace Enablement Lab: Business Observability</title>
       
     
     
@@ -82,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#business-observability-with-rum" class="md-skip">
+        <a href="#configure-csp-overrides" class="md-skip">
           Skip to content
         </a>
       
@@ -118,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5. Business Observability with RUM
+              7 backup for csp overrides
             
           </span>
         </div>
@@ -348,30 +344,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    5. Business Observability with RUM
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../5-business-observability-rum/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -380,59 +356,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#customer-journey" class="md-nav__link">
-    <span class="md-ellipsis">
-      Customer Journey
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Customer Journey">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-bizevents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prepare BizEvents
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#continue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Continue
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -474,8 +397,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -484,33 +405,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#customer-journey" class="md-nav__link">
+  <a href="#configure-csp-overrides" class="md-nav__link">
     <span class="md-ellipsis">
-      Customer Journey
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Customer Journey">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-bizevents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prepare BizEvents
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#continue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Continue
+      Configure CSP Overrides
     </span>
   </a>
   
@@ -534,114 +431,25 @@
   
 
 
-<h1 id="business-observability-with-rum">Business Observability with RUM<a class="headerlink" href="#business-observability-with-rum" title="Permanent link">#</a></h1>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  dynatrace.sendBizEvent('page_load', {"page": "5. Business Observability with RUM"})
-});
-</script>
+  <h1>7 backup for csp overrides</h1>
 
-<p>Business events (BizEvents) are an important concept and central to Dynatrace Business Analytics. Business events generate business-grade data to enable important use cases.</p>
-<p>Business events are available for all Dynatrace RUM technologies (web RUM, mobile RUM, and OpenKit). RUM business events can be obtained by leveraging a dedicated method of the RUM JavaScript, OneAgent for mobile, or OpenKit.</p>
-<div class="grid cards">
-<ul>
-<li><a href="https://docs.dynatrace.com/docs/shortlink/ba-business-events-capturing#report-business-event-rum" target="_blank">Learn More<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
-</ul>
+<p><strong>Content Security Policy CSP</strong></p>
+<p>You may encounter sites that restrict remote content loading and requests using the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP" target="_blank">Content Security Policy (CSP)</a>. 
+While the new version of the RUM injector should resolve these issues, the below details are included if you run into problems.</p>
+<p>Content Security Policy (CSP) is a feature that helps to prevent or minimize the risk of certain types of security threats. It consists of a series of instructions from a website to a browser, which instruct the browser to place restrictions on the things that the code comprising the site is allowed to do.</p>
+<p>The primary use case for CSP is to control which resources, in particular JavaScript resources, a document is allowed to load. This is mainly used as a defense against <a href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting" target="_blank">cross-site scripting (XSS)</a> attacks, in which an attacker is able to inject malicious code into the victim's site.</p>
+<p>Since we are injecting our RUM locally via an extension, you will see these warnings in your Chrome Developer Tools Console.</p>
+<h3 id="configure-csp-overrides">Configure CSP Overrides<a class="headerlink" href="#configure-csp-overrides" title="Permanent link">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Overrides Active with Developer Tools Only</p>
+<p>Enabling these local overrides only function while the Chrome Developer Tools are open.  Be sure to leave them open for the entire time that you're doing this exercise and browsing the website.</p>
 </div>
-<h2 id="customer-journey">Customer Journey<a class="headerlink" href="#customer-journey" title="Permanent link">#</a></h2>
-<p>Now that we understand the customer's digital experience, thanks to Real User Monitoring and Session Replay, now we want to understand the business outcomes of the customer journey.  We can accomplish this by sending BizEvents with the RUM JavaScript agent during the customer journey process.</p>
-<h3 id="prepare-bizevents">Prepare BizEvents<a class="headerlink" href="#prepare-bizevents" title="Permanent link">#</a></h3>
-<p>If you haven't already, download the <code>Customer_Journey</code> notebook.</p>
-<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Workshop_Customer_Journey.json" target="_blank">Download Workshop Notebook</a></p>
-<p>In your Dynatrace tenant, open the <strong>Notebooks</strong> app.  Click <code>Upload</code> to upload the <code>Customer_Journey</code> notebook.</p>
-<p>Locate the <strong>Customer Journey</strong> markdown section.  This markdown section includes the steps for purchasing products on the DEM Strike &amp; Save webaite. We've already filled out the details for you, but you when you want to build this for your prospect or customer, you can use the following blank template to enter the customer journey steps. </p>
-<p><a href="https://github.com/dynatrace-wwse/enablement-browser-dem-biz-observability/blob/main/docs/assets/dynatrace/notebook/Blank_Customer_Journey.json" target="_blank">Notebook for Tailored Demos</a></p>
-<p>DEM Strike Purchase Journey example:</p>
-<ul>
-<li>Journey Name: <code>DEM Strike Purchase Journey</code></li>
-<li>Step 1: <code>Product Page</code></li>
-<li>Step 2: <code>Add to Cart</code></li>
-<li>Step 3: <code>Cart Page</code></li>
-<li>Step 4: <code>Checkout Page</code></li>
-<li>Step 5: <code>Order Received</code></li>
-</ul>
-<p>Locate the <strong>BizEvent Template Example</strong> markdown section.  Here you will find the code snippet example for sending a BizEvent using the Dynatrace RUM JavaScript agent/sdk. </p>
-<p>Locate the <strong>Customer Journey BizEvents</strong> markdown section.  Below this section you'll find (10) sections; one markdown section with a code snippet and one DQL query for bizevents for each step of the customer journey. We've done the hard work for you and pre-populated all of the biz event steps and DQL queries for the DEM Strike Purchase Journey.</p>
-<p>On another browser tab, navigate through a customer journey on the DEM Strike website and update the notebook with the attributes for each step to match your journey (page name, products, amounts, etc.) This helps us bring the demo to life and provide business context to the events.</p>
-<p>Once you've modified the code snippets, start a new browser session and move through the customer journey.  Pause at each step of the journey and use the developer tools console to send a BizEvent with the correct payload.</p>
-<p><img alt="Send BizEvent" src="../img/rum-biz-obs_customer_journey_send_bizevent.gif" /></p>
-<p>After sending the BizEvent, wait a minute (usually sooner) and query the BizEvents in the notebook.</p>
-<p>Complete step 1, send a BizEvent, and query the results.</p>
-<p><img alt="Customer Journey BizEvent Step 1" src="../img/rum-biz-obs_customer_journey_bizevent_step_1.png" /></p>
-<p>Complete step 2, send a BizEvent, and query the results.</p>
-<p><img alt="Customer Journey BizEvent Step 2" src="../img/rum-biz-obs_customer_journey_bizevent_step_2.png" /></p>
-<p>Complete step 3, send a BizEvent, and query the results.</p>
-<p><img alt="Customer Journey BizEvent Step 3" src="../img/rum-biz-obs_customer_journey_bizevent_step_3.png" /></p>
-<p>Complete step 4, send a BizEvent, and query the results.</p>
-<p><img alt="Customer Journey BizEvent Step 4" src="../img/rum-biz-obs_customer_journey_bizevent_step_4.png" /></p>
-<p>Complete step 5, send a BizEvent, and query the results.</p>
-<p><img alt="Customer Journey BizEvent Step 5" src="../img/rum-biz-obs_customer_journey_bizevent_step_5.png" /></p>
-<p>Now that you have observability into the entire customer journey, use DQL and your creativity to analyze the business outcome of this journey.</p>
-<p>Google Travel Track Flight example:</p>
-<p>DQL:
-<div class="highlight"><pre><span></span><code>fetch bizevents
-| filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-| filter event.type == &quot;track-flight.travel-homepage&quot;
-| limit 1
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.travel-homepage&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;travel-homepage.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.flight-search&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;flight-search.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.search-results&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;search-results.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.select-flight&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;select-flight.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter workshop == &quot;business-observability&quot; and event.provider == &quot;google-travel.track-flight.v002&quot; and event.category == &quot;track-flight&quot;
-    | filter event.type == &quot;track-flight.track-flight&quot;
-  ], on: {dt.rum.session.id}, prefix: &quot;track-flight.&quot;
-| fieldsAdd `decision-time-step-2` = if(isNotNull(`flight-search.timestamp`),(`flight-search.timestamp` - timestamp), else: null)
-| fieldsAdd `decision-time-step-3` = if(isNotNull(`search-results.timestamp`),(`search-results.timestamp`- `flight-search.timestamp`), else: null)
-| fieldsAdd `decision-time-step-4` = if(isNotNull(`select-flight.timestamp`),(`select-flight.timestamp` - `search-results.timestamp`), else: null)
-| fieldsAdd `decision-time-step-5` = if(isNotNull(`track-flight.timestamp`),(`track-flight.timestamp` - `select-flight.timestamp`), else: null)
-| fieldsAdd conversion = if(isNotNull(`track-flight.event.id`), true, else: false)
-| fields {journeyStartTime = timestamp, 
-          journeyId = dt.rum.session.id,
-          conversion,
-          userCountry = geo.country.name,
-          userRegion = geo.region.name,
-          userCity = geo.city.name,
-          decisionTimeStep2 = `decision-time-step-2`,
-          decisionTimeStep3 = `decision-time-step-3`,
-          decisionTimeStep4 = `decision-time-step-4`,
-          decisionTimeStep5 = `decision-time-step-5`,
-          departingAirport = `track-flight.departing`,
-          arrivingAirport = `track-flight.arriving`,
-          price = `track-flight.price`
-          }
-</code></pre></div></p>
-<p><img alt="Business Analytics" src="../img/rum-biz-obs_customer_journey_business_analytics.png" /></p>
-<p>Wow!  What a powerful query that let's us understand everything about the customer journey.  Business Observability focuses on the business outcomes and business KPIs needed to make data-driven decisions and when used in collaboration with DEM, ties customer experience to business outcomes.</p>
-<h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>
-<p>But what about business processes that go beyond the customer journey? What if we want to generate a ton of business data for wowing customers with insights in dashboards? In the next section we'll do just that, including exploring Business Flows, Dashboarding, and generating data.</p>
-<div class="grid cards">
-<ul>
-<li><a href="../6-business-observability-automation/">Continue to Business Observability Automation<span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></li>
-</ul>
-</div>
+<p>Navigate to the website (you should be there already).</p>
+<p>Open the Developer Tools <code>View &gt; Developer &gt; Developer Tools</code>. Switch to the <code>Sources</code> tab, then <code>Overrides</code> sub-tab.</p>
+<p>Click <code>Select folder for overrides</code>.  Navigate to the <code>overrides</code> directory <strong>in your unzipped extension folder</strong> and press <code>Select</code>.</p>
+<p>If prompted to allow local edit, click <code>Edit</code>.</p>
+<p><img alt="Add Local Overrides" src="../img/real-user_configure_extension_add_local_overrides.gif" /></p>
+<p>Click and hold the refresh button and select <code>Empty cache and hard reload</code>.  As the page loads, navigate to the <code>Network</code> tab of Developer Tools and locate the Dynatrace RUM beacons.  You can filter on <code>Fetch/XHR</code> request types and the pattern <code>bf?</code>.  Validate that you're seeing HTTP status <strong>200</strong>.</p>
 
 
 

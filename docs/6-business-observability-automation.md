@@ -57,6 +57,9 @@ Using the information provided, modify the attached script by replacing the plac
 ```
 
 Submit your prompt and allow CoPilot to generate a response.  Review the results provided and validate that it looks OK.
+
+**Validate Config**
+
 There are a few things CoPilot may struggle with. Ensure the swaps follow the correct syntax (Ex: keys in key value pairs should be key.detail) and all placeholders have been replaced (Ex: locations are actual city names instead of LOCATION 1). 
 
 ![CoPilot Code Snippet Validation](./img/biz-obs-auto_copilot_code_snippet_output_validation.png)

@@ -2,10 +2,6 @@
 # Load framework
 source .devcontainer/util/source_framework.sh
 
-# Load tests
-source $REPO_PATH/.devcontainer/test/test_functions.sh
-
-printInfoSection "Running integration Tests for the Enablement Framework"
+printInfoSection "Running integration Tests for $RepositoryName"
 
 printWarn "This enablement needs no running application"
-

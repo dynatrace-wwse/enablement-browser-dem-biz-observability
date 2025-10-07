@@ -403,3 +403,6 @@ This visibility is your competitive edge. It empowers you to:
 In short, you’ve learned how to turn process visibility into business velocity.
 
 Now, take what you’ve learned and apply it in practice, to fully solve the use case.
+
+
+--8<-- "snippets/feedback.md"

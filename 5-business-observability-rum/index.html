@@ -171,6 +171,11 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -573,52 +578,52 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Now that you have observability into the entire customer journey, use DQL and your creativity to analyze the business outcome of this journey.</p>
 <p>DEM Strike Outcome:</p>
 <p>DQL:
-<div class="highlight"><pre><span></span><code>fetch bizevents
-| filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
-| filter event.name == &quot;view-product-page&quot;
-| limit 1
-| join kind: inner, [
-    fetch bizevents
-    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
-    | filter event.name == &quot;add-to-cart&quot;
-], on: {user.unique.id}, prefix: &quot;add-to-cart.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
-    | filter event.name == &quot;cart-page-view&quot;
-], on: {user.unique.id}, prefix: &quot;cart-page.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
-    | filter event.name == &quot;checkout-page-view&quot;
-], on: {user.unique.id}, prefix: &quot;checkout-page.&quot;
-| join kind: inner, [
-    fetch bizevents
-    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
-    | filter event.name == &quot;order-received&quot;
-], on: {user.unique.id}, prefix: &quot;order-received.&quot;
-| fieldsAdd `decision-time-step-2` = if(isNotNull(`add-to-cart.timestamp`),(`add-to-cart.timestamp` - timestamp), else: null)
-| fieldsAdd `decision-time-step-3` = if(isNotNull(`cart-page.timestamp`),(`cart-page.timestamp` - `add-to-cart.timestamp`), else: null)
-| fieldsAdd `decision-time-step-4` = if(isNotNull(`checkout-page.timestamp`),(`checkout-page.timestamp` - `cart-page.timestamp`), else: null)
-| fieldsAdd `decision-time-step-5` = if(isNotNull(`order-received.timestamp`),(`order-received.timestamp` - `checkout-page.timestamp`), else: null)
-| fieldsAdd conversion = if(isNotNull(`order-received.order.id`), true, else: false)
-| fields {
-    journeyStartTime = timestamp,
-    journeyId = user.unique.id,
-    conversion,
-    customerStatus = customer.status,
-    loyaltyLevel = customer.loyalty.level,
-    decisionTimeStep2 = `decision-time-step-2`,
-    decisionTimeStep3 = `decision-time-step-3`,
-    decisionTimeStep4 = `decision-time-step-4`,
-    decisionTimeStep5 = `decision-time-step-5`,
-    productName = product.name,
-    productCategory = product.category,
-    productPrice = product.price,
-    orderTotal = `order-received.order.total.value`
-
-}
-</code></pre></div></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fetch bizevents
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>| filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>| filter event.name == &quot;view-product-page&quot;
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>| limit 1
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>| join kind: inner, [
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    fetch bizevents
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    | filter event.name == &quot;add-to-cart&quot;
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>], on: {user.unique.id}, prefix: &quot;add-to-cart.&quot;
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>| join kind: inner, [
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    fetch bizevents
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    | filter event.name == &quot;cart-page-view&quot;
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>], on: {user.unique.id}, prefix: &quot;cart-page.&quot;
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>| join kind: inner, [
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    fetch bizevents
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    | filter event.name == &quot;checkout-page-view&quot;
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>], on: {user.unique.id}, prefix: &quot;checkout-page.&quot;
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>| join kind: inner, [
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    fetch bizevents
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    | filter event.provider == &quot;dem-strike-web&quot; and event.category == &quot;strike-purchase-journey&quot;
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    | filter event.name == &quot;order-received&quot;
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>], on: {user.unique.id}, prefix: &quot;order-received.&quot;
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>| fieldsAdd `decision-time-step-2` = if(isNotNull(`add-to-cart.timestamp`),(`add-to-cart.timestamp` - timestamp), else: null)
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>| fieldsAdd `decision-time-step-3` = if(isNotNull(`cart-page.timestamp`),(`cart-page.timestamp` - `add-to-cart.timestamp`), else: null)
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>| fieldsAdd `decision-time-step-4` = if(isNotNull(`checkout-page.timestamp`),(`checkout-page.timestamp` - `cart-page.timestamp`), else: null)
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>| fieldsAdd `decision-time-step-5` = if(isNotNull(`order-received.timestamp`),(`order-received.timestamp` - `checkout-page.timestamp`), else: null)
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>| fieldsAdd conversion = if(isNotNull(`order-received.order.id`), true, else: false)
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>| fields {
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    journeyStartTime = timestamp,
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    journeyId = user.unique.id,
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    conversion,
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    customerStatus = customer.status,
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    loyaltyLevel = customer.loyalty.level,
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    decisionTimeStep2 = `decision-time-step-2`,
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    decisionTimeStep3 = `decision-time-step-3`,
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    decisionTimeStep4 = `decision-time-step-4`,
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    decisionTimeStep5 = `decision-time-step-5`,
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    productName = product.name,
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    productCategory = product.category,
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    productPrice = product.price,
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    orderTotal = `order-received.order.total.value`
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>}
+</span></code></pre></div></p>
 <p><img alt="Business Analytics" src="../img/rum-biz-obs_customer_journey_business_analytics.png" /></p>
 <p>Wow!  What a powerful query that let's us understand everything about the customer journey.  Business Observability focuses on the business outcomes and business KPIs needed to make data-driven decisions and when used in collaboration with DEM, ties customer experience to business outcomes.</p>
 <h2 id="continue">Continue<a class="headerlink" href="#continue" title="Permanent link">#</a></h2>
@@ -645,6 +650,8 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
@@ -657,6 +664,46 @@ document.addEventListener('DOMContentLoaded', function() {
       </main>
       
         <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../4-real-user-monitoring/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 4. Real User Monitoring">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                4. Real User Monitoring
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../6-business-observability-automation/" class="md-footer__link md-footer__link--next" aria-label="Next: 6. Business Observability Automation">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                6. Business Observability Automation
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -680,7 +727,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "content.tabs.link", "navigation.instant", "navigation.tracking", "navigation.top", "navigation.sections", "navigation.footer", "toc.follow", "search.highlight", "search.suggest", "search.share"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>

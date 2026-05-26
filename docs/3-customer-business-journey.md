@@ -1,5 +1,4 @@
 # Customer Journey vs Business Journey
---8<-- "snippets/send-bizevent/3-customer-business-journey.js"
 
 ## Understanding Customer vs Business Journeys
 

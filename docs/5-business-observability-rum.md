@@ -1,5 +1,4 @@
 # Business Observability with RUM
---8<-- "snippets/send-bizevent/5-business-observability-rum.js"
 
 Business events (BizEvents) are an important concept and central to Dynatrace Business Analytics. Business events generate business-grade data to enable important use cases.
 

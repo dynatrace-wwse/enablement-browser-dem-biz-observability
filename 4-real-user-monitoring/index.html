@@ -644,7 +644,7 @@
 <p><img alt="Locate RUM Beacon" src="../img/real-user_configure_extension_hard_refresh_find_beacon.gif" /></p>
 <p>Now click around on the site and check in Dynatrace to validate data is coming in. Once validated, navigate from the start of the customer journey to the end. When you start the journey, tag your user session with your user identifier.  When you end your journey, manually end the journey with the console command.</p>
 <p>Tag User:
-<div class="language-javascript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">&#39;user-name&#39;</span><span class="p">)</span>
+<div class="language-javascript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">dtrum</span><span class="p">.</span><span class="nx">identifyUser</span><span class="p">(</span><span class="s1">'user-name'</span><span class="p">)</span>
 </span></code></pre></div></p>
 <p>Normally, user sessions end on one of the ways <a href="https://docs.dynatrace.com/docs/shortlink/user-session#user-session-end" target="_blank">documented here</a>.  However, we want to be able to create a bunch of sessions quickly without having to close the browser or wait for inactivity. To do this, navigate to the console in Chrome Developer Tools and type <code>dtrum.endSession()</code> and hit enter to end the session manually.</p>
 <p>End Session:

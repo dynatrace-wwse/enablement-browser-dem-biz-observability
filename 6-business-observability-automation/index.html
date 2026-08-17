@@ -804,7 +804,7 @@
 <p>Next, upload the configuration code snippet that you downloaded (<code>config.js</code>) by clicking the <code>+</code> button and then <code>Upload from this device</code>.</p>
 <p><img alt="CoPilot Upload" src="../img/biz-obs-auto_copilot_upload_from_this_device.png" /></p>
 <p>Before submitting the file, add the following to your message to give CoPilot instructions on what to do with the code snippet.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Using the information provided, modify the attached script by replacing the placeholder values with the company&#39;s business process details.  Output the value of the modified script here so that I may see it.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Using the information provided, modify the attached script by replacing the placeholder values with the company's business process details.  Output the value of the modified script here so that I may see it.
 </span></code></pre></div>
 <p>Submit your prompt and allow CoPilot to generate a response.  Review the results provided and validate that it looks OK.</p>
 <p><strong>Validate Config</strong></p>
@@ -850,7 +850,7 @@
 <p>Validate your BizEvents by running a DQL query.  The simplest way to do this is with a <strong>Notebook</strong>.  Query data for the last <code>24 hours</code>.</p>
 <p>DQL:
 <div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">fetch</span><span class="w"> </span><span class="n">bizevents</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">|</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">&quot;your.event.provider&quot;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="o">|</span><span class="w"> </span><span class="n">filter</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="n">provider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"your.event.provider"</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">|</span><span class="w"> </span><span class="n">summarize</span><span class="w"> </span><span class="k">count</span><span class="p">(),</span><span class="w"> </span><span class="k">by</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="n">event</span><span class="p">.</span><span class="n">provider</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="k">type</span><span class="err">}</span>
 </span></code></pre></div></p>
 <p><img alt="Validate BizEvents DQL" src="../img/biz-obs-auto_workflows_validate_bizevents_dql.png" /></p>
@@ -982,8 +982,8 @@
 <p>Choose one of these data KPI types and using the template DQL – populate the “Business KPI” tile, and also the description above the tiles. </p>
 <p><strong>Time between two steps</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>fetch bizevents 
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| filter event.provider == &quot;&lt;Your event provider&gt;&quot; 
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| filter event.type == &quot;&lt;First event type&gt;&quot; or event.type == &quot;&lt;Second event type&gt;&quot; 
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| filter event.provider == "&lt;Your event provider&gt;" 
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| filter event.type == "&lt;First event type&gt;" or event.type == "&lt;Second event type&gt;" 
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| summarize firstTime = takeMin(timestamp), secondTime = takeMax(timestamp), by:{&lt;Correlation ID&gt; } 
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>| filterOut isNull(firstTime) or isNull(secondTime) 
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>| fieldsAdd duration = secondTime - firstTime 
@@ -991,16 +991,16 @@
 </span></code></pre></div>
 <p><strong>Success rate of step</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>fetch bizevents 
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>| filter event.provider == &quot;&lt;Your event provider&gt;&quot; 
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>| filter startsWith(event.type, &quot;&lt;event.type of your step that errors&gt;&quot;) 
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>| summarize total = count(), success = countIf(event.type == &quot;&lt;event.type of your step that errors&gt;&quot;) 
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>| filter event.provider == "&lt;Your event provider&gt;" 
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>| filter startsWith(event.type, "&lt;event.type of your step that errors&gt;") 
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>| summarize total = count(), success = countIf(event.type == "&lt;event.type of your step that errors&gt;") 
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>| fieldsAdd percentage = toDouble(success) / toDouble(total) * 100 
 </span></code></pre></div>
 <p><strong>Comparison to previous time</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>fetch bizevents, from: -1h
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>| filter event.provider == &quot;&lt;Your event provider&gt;&quot; and event.type == &quot;&lt;event.type of step in question&gt;&quot; 
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>| filter event.provider == "&lt;Your event provider&gt;" and event.type == "&lt;event.type of step in question&gt;" 
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>| summarize valueNow= count(), by:{event.type} 
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>| lookup [fetch bizevents, from: -24h, to:-23h | filter event.provider == &quot;&lt;Your event provider&gt;&quot; and event.type == &quot;&lt;event.type of step in question&gt;&quot; | summarize previousValue = count(), by:{event.type} ], sourceField:event.type, lookupField:event.type 
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>| lookup [fetch bizevents, from: -24h, to:-23h | filter event.provider == "&lt;Your event provider&gt;" and event.type == "&lt;event.type of step in question&gt;" | summarize previousValue = count(), by:{event.type} ], sourceField:event.type, lookupField:event.type 
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>| fieldsAdd percentageChange = ((toDouble(lookup.previousValue) - toDouble(valueNow)) / toDouble(valueNow)) * 100
 </span></code></pre></div>
 <p>Once this is done, populate the first “graph” underneath the tiles at the top. Typically this first graph will be related in some way to the tile at the top. For example: </p>
@@ -1011,9 +1011,9 @@
 <p>Lost “flows” – for example mortgage applications that haven’t been touched in X hours. Related to the above, what’s the “revenue” impact of lost flows. Flows split by segment.</p>
 <p><strong>Lost items</strong></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fetch bizevents 
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>| filter event.provider == &quot;&lt;Your event provider
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>| filter event.type == &quot;&lt;First event type&gt;&quot; or event.type == &quot;&lt;Second event type&gt;&quot;
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>| summarize firstCount = countIf(event.type == &quot;&lt;First event type&gt;&quot;), secondCount = countIf(event.type == &quot;&lt;Second event provider&gt;&quot;),firstTime = takeFirst(timestamp), by:{&lt;Correlation ID&gt; }
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>| filter event.provider == "&lt;Your event provider
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>| filter event.type == "&lt;First event type&gt;" or event.type == "&lt;Second event type&gt;"
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>| summarize firstCount = countIf(event.type == "&lt;First event type&gt;"), secondCount = countIf(event.type == "&lt;Second event provider&gt;"),firstTime = takeFirst(timestamp), by:{&lt;Correlation ID&gt; }
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>| fieldsAdd timeSinceFirstStep = (now() - firstTime)
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>| filter secondCount == 0 and timeSinceFirstStep &gt; toDuration(7200000000000) //Time in nanoseconds
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>| makeTimeseries `Lost flows` = count(), time: firstTime, bins:50

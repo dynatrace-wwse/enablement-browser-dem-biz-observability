@@ -1,3 +1,12 @@
+---
+description: Follow a website's customer journey with agentless RUM and the RUM browser extension, and capture business events straight from the browser. Then automate a business journey with Workflows, generate a Business Flow with CoPilot and analyze it, to build a tailored DEM and Business Observability demo.
+tags:
+  - classic
+  - rum
+  - dem
+  - bizevents
+---
+
 !!! warning "Not yet migrated to the Dynatrace Enablement App"
     This training has not been migrated to a fully immersive, interactive and self-service training.
     Questions or feedback? Reach out to the Center of Excellence Enablement Team via
